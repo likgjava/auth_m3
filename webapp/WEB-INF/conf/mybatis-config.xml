@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+			<!--  
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			
+			<dataSource type="JNDI">
+				<property name="initial_context" value="java:comp/env" />
+				<property name="data_source" value="jdbc/auth" />
+			</dataSource>
+			
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://127.0.0.1:3306/auth" />
+				<property name="username" value="root" />
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/likg/auth/dao/UserMapper.xml" />
+		<mapper resource="com/likg/auth/dao/RoleMapper.xml" />
+	</mappers>
+			-->
+</configuration>

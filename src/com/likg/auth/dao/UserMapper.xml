@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.likg.auth.dao.UserMapper">
+
+	<resultMap id="userMap" type="com.likg.auth.domain.User">
+		<result column="id" property="id" />
+		<result column="user_name" property="userName" />
+	</resultMap>
+
+	<select id="getUser" parameterType="int" resultMap="userMap">
+		select id,user_name from auth_user where id = #{id}
+	</select>
+	
+	<select id="selectList" resultMap="userMap">
+		select id,user_name userName from auth_user order by id desc
+	</select>
+	
+	
+	<insert id="saveUser" parameterType="com.likg.auth.domain.User" useGeneratedKeys="true" keyProperty="id">
+		insert into auth_user(user_name) values(#{userName})
+	</insert>
+	
+	<insert id="saveUserRole" parameterType="com.likg.auth.domain.User">
+		insert into auth_user_role(user_id,role_id) values
+		<foreach collection="roleList" item="role" separator=",">
+			(#{id},#{role.id})
+		</foreach>
+	</insert>
+	
+	<delete id="deleteUserRole" parameterType="int">
+		delete from auth_user_role where user_id=#{id}
+	</delete>
+	
+	<update id="updateUser" parameterType="com.likg.auth.domain.User">
+		update auth_user set user_name=#{userName} where id=#{id}
+	</update>
+	
+	<delete id="deleteUser" parameterType="int">
+		delete from auth_user where id=#{id}
+	</delete>
+	
+	<select id="getPage" parameterType="com.likg.auth.domain.Role" resultMap="userMap">
+		select id,user_name from auth_user 
+		where 1=1
+			<if test="userName!=null and userName!=''">and user_name like CONCAT('%',#{userName},'%')</if> 
+		order by id desc
+	</select>
+	<select id="getCount" parameterType="com.likg.auth.domain.Role" resultType="int">
+		select count(id) from auth_user
+		where 1=1
+			<if test="userName!=null and userName!=''">and user_name like CONCAT('%',#{userName},'%')</if>
+	</select>
+	
+	
+	<select id="getMaxGoodsId" resultType="int">
+		select max(id) from goods2
+	</select>
+	
+	
+</mapper>
