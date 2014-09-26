@@ -16,6 +16,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 		if(dataSource == null){
 			dataSource = MASTER;
 		}
+		setRoute(MASTER); //还原到主库
 		return dataSource;
 	}
 	

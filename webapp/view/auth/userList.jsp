@@ -9,6 +9,9 @@
 		<tr>
 			<th data-options="field:'id',width:80">ID</th>
 			<th data-options="field:'userName',width:80">用户名</th>
+			<th data-options="field:'realName',width:80">姓名</th>
+			<th data-options="field:'status',width:80">状态</th>
+			<th data-options="field:'createTime',width:80">创建时间</th>
 			<th data-options="field:'oper', formatter:addOper">操作</th>
 		</tr>
 	</thead>

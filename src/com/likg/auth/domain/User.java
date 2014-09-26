@@ -1,14 +1,13 @@
 package com.likg.auth.domain;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Serializable {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-	private static final long serialVersionUID = 1L;
-	
+public class User {
+
 	/**
 	 * 记录号
 	 */
@@ -22,17 +21,18 @@ public class User implements Serializable {
 	/**
 	 * 密码
 	 */
-	private String userPassword;
+	@JsonIgnore
+	private String password;
 	
 	/**
 	 * 真实姓名
 	 */
-	private String userRealName;
+	private String realName;
 	
 	/**
 	 * 使用状态[1:有效；2:禁用]
 	 */
-	private int useStatus;
+	private int status;
 	
 	/**
 	 * 创建时间
@@ -60,28 +60,28 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getUserRealName() {
-		return userRealName;
+	public String getRealName() {
+		return realName;
 	}
 
-	public void setUserRealName(String userRealName) {
-		this.userRealName = userRealName;
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
-	public int getUseStatus() {
-		return useStatus;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setUseStatus(int useStatus) {
-		this.useStatus = useStatus;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public Timestamp getCreateTime() {
@@ -99,5 +99,5 @@ public class User implements Serializable {
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
 	}
-	
+
 }
