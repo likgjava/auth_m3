@@ -6,7 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 /**
  * 封装EasyUI中DataGrid的分页信息
  * <br/>因为请求参数中的‘每页数据量’与返回结果中的‘列表数据’使用的是同一个单词(rows)，所以需要特殊处理一下。

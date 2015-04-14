@@ -20,7 +20,7 @@
 		<span>Remember me</span>
 	</div>
 	<div>
-		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
+		<a href="${path}/index.jsp" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
 			<span style="font-size:14px;">登录</span>
 		</a>
 	</div>

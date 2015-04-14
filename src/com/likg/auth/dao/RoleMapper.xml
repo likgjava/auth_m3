@@ -5,14 +5,17 @@
 	<resultMap type="com.likg.auth.domain.Role" id="roleMap">
 		<result property="id" column="id" />
 		<result property="roleName" column="role_name" />
+		<result property="roleChName" column="role_ch_name" />
+		<result property="roleDesc" column="role_desc" />
+		<result property="createTime" column="create_time" />
 	</resultMap>
 
 	<select id="getRole" parameterType="int" resultMap="roleMap">
-		select id,role_name from auth_role where id = #{id}
+		select id,role_name,role_ch_name,role_desc,create_time from auth_role where id = #{id}
 	</select>
 	
 	<select id="getRoleList" resultMap="roleMap">
-		select id,role_name from auth_role order by id desc
+		select id,role_name,role_ch_name,role_desc,create_time from auth_role order by id desc
 	</select>
 	
 	<select id="getRoleListByUser" parameterType="int" resultMap="roleMap">
@@ -23,11 +26,13 @@
 	</select>
 	
 	<insert id="saveRole" parameterType="com.likg.auth.domain.Role">
-		insert into auth_role(role_name) values(#{roleName})
+		insert into auth_role(role_name,role_ch_name,role_desc,create_time) 
+		values(#{roleName},#{roleChName},#{roleDesc},now())
 	</insert>
 	
 	<update id="updateRole" parameterType="com.likg.auth.domain.Role">
-		update auth_role set role_name=#{roleName} where id=#{id}
+		update auth_role set role_name=#{roleName},role_ch_name=#{roleChName},role_desc=#{roleDesc}
+		where id=#{id}
 	</update>
 	
 	<delete id="deleteRole" parameterType="int">
@@ -38,7 +43,7 @@
 	</delete>
 	
 	<select id="getPage" parameterType="com.likg.auth.domain.Role" resultMap="roleMap">
-		select id,role_name from auth_role 
+		select id,role_name,role_ch_name,role_desc,create_time from auth_role 
 		where 1=1
 			<if test="roleName!=null and roleName!=''">and role_name like CONCAT('%',#{roleName},'%')</if> 
 		order by id desc

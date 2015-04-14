@@ -21,7 +21,7 @@ import com.likg.auth.service.RoleService;
 import com.likg.auth.service.UserService;
 
 @Controller
-@RequestMapping(value="/user")
+@RequestMapping("/UserController")
 public class UserController {
 	
 	private static Logger log = Logger.getLogger(UserController.class);

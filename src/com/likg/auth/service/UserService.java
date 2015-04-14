@@ -29,7 +29,7 @@ public class UserService {
 		}
 		
 		DynamicDataSource.setRoute(DynamicDataSource.SLAVE);
-		int maxId = userMapper.getMaxGoodsId();
+		Integer maxId = userMapper.getMaxGoodsId();
 		System.out.println("maxId==="+maxId);
 		
 		return page;

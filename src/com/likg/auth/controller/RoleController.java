@@ -18,7 +18,7 @@ import com.likg.auth.domain.Role;
 import com.likg.auth.service.RoleService;
 
 @Controller
-@RequestMapping("/role")
+@RequestMapping("/RoleController")
 public class RoleController {
 	
 	private static Logger log = Logger.getLogger(RoleController.class);
@@ -93,7 +93,7 @@ public class RoleController {
 			roleService.saveRole(role);
 		} catch (Exception e) {
 			result = e.toString();
-			log.error("出现异常：", e);
+			log.error(e);
 		}
 		this.renderText(response, result);
 	}

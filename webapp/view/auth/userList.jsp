@@ -3,7 +3,7 @@
 
 <div style="margin: 5px;">
 <table id="dataList" class="easyui-datagrid" title="用户列表"
-	url='${path}/user/getPage.do'
+	url='${path}/UserController/getPage.do'
 	data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:10,method:'post',toolbar:'#tb',fitColumns:true">
 	<thead>
 		<tr>
@@ -69,7 +69,7 @@ function searchData(){
 
 //打开详情窗口
 function openDetailDialog(id){
-	var url = '${path}/user/toUserDetail.do?id='+id;
+	var url = '${path}/UserController/toUserDetail.do?id='+id;
 	$("#userDetailDialog").dialog({
 		title: '用户详情',
 		href: url,
@@ -83,7 +83,7 @@ function openDetailDialog(id){
 
 //打开表单窗口
 function openFormDialog(id){
-	var url = '${path}/user/toUserForm.do'+(id!=null ? '?id='+id : '');
+	var url = '${path}/UserController/toUserForm.do'+(id!=null ? '?id='+id : '');
 	$("#userFormDialog").dialog({
 		title: '用户维护',
 		href: url,
@@ -98,7 +98,7 @@ function openFormDialog(id){
 //保存
 function saveUser(){
 	$('#userForm').form('submit',{
-		url: '${path}/user/save.do',
+		url: '${path}/UserController/save.do',
 		dataType: 'json',
 		onSubmit: function(param){
 			if(!$(this).form('validate')){
@@ -132,7 +132,7 @@ function saveUser(){
 
 //删除
 function deleteUser(id){
-	$.get('${path}/user/delete.do',{id:id},function(json){
+	$.get('${path}/UserController/delete.do',{id:id},function(json){
 		if (json.result == 'success'){
 			$('#dataList').datagrid('reload');
 		}else{

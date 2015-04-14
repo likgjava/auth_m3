@@ -58,7 +58,7 @@
 	
 	
 	<select id="getMaxGoodsId" resultType="int">
-		select max(id) from goods2
+		select max(id) from goods
 	</select>
 	
 	

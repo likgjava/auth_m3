@@ -3,13 +3,16 @@
 
 <div style="margin: 5px;">
 <table id="roleDataList" class="easyui-datagrid" title="角色列表"
-	url='${path}/role/getPage.do'
+	url='${path}/RoleController/getPage.do'
 	data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:10,method:'post',toolbar:'#role_tb',fitColumns:true">
 	<thead>
 		<tr>
 			<th data-options="field:'id',width:80">ID</th>
 			<th data-options="field:'roleName',width:80">角色名称</th>
-			<th data-options="field:'oper', formatter:addOper">操作</th>
+			<th data-options="field:'roleChName',width:80">角色名称</th>
+			<th data-options="field:'roleDesc',width:80, formatter:showTip">角色名称</th>
+			<th data-options="field:'createTime',width:80">创建时间</th>
+			<th data-options="field:'oper',width:80, formatter:addOper">操作</th>
 		</tr>
 	</thead>
 </table>
@@ -38,6 +41,10 @@ $(window).resize(function(){
 	$('#roleDataList').datagrid('resize');
 });
 
+function showTip(val,row){
+	return '<span class="easyui-tooltip" title="'+val+'">' + val + '</span>';
+}
+
 //操作
 function addOper(val,row){
 	var operHtml = '';
@@ -55,7 +62,7 @@ function searchData(){
 
 //打开表单窗口
 function openFormDialog(id){
-	var url = '${path}/role/toRoleForm.do'+(id!=null ? '?id='+id : '');
+	var url = '${path}/RoleController/toRoleForm.do'+(id!=null ? '?id='+id : '');
 	$("#formDialog").dialog({
 		title: '角色维护',
 		href: url,
@@ -70,7 +77,7 @@ function openFormDialog(id){
 //保存
 function saveRole(){
 	$('#roleForm').form('submit',{
-		url: '${path}/role/save.do',
+		url: '${path}/RoleController/save.do',
 		dataType: 'json',
 		onSubmit: function(param){
 			return $(this).form('validate');
@@ -92,7 +99,7 @@ function saveRole(){
 function deleteRole(id){
 	$.messager.confirm('', '确定删除该角色吗？', function(r){
 		if(r){
-			$.get('${path}/role/delete.do',{id:id},function(json){
+			$.get('${path}/RoleController/delete.do',{id:id},function(json){
 				if (json.result == 'success'){
 					$('#roleDataList').datagrid('reload');
 				}else{
