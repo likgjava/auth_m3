@@ -4,9 +4,9 @@
 <head>
 <%@ include file="/view/common/head.jsp" %>
 </head>
-<body style="text-align:center;">
-
-<div class="easyui-panel" title="Login to system" style="width:400px;padding:30px 70px 20px 70px;">
+<body>
+<div style="margin:0 auto; width:400px;">
+<div class="easyui-panel" title="Login to system" style="padding:30px 70px 20px 70px;">
 	<div style="margin-bottom:10px">
 		<input class="easyui-textbox" style="width:100%;height:40px;padding:12px" 
 			data-options="prompt:'用户名',iconCls:'icon-man',iconWidth:38">
@@ -24,6 +24,7 @@
 			<span style="font-size:14px;">登录</span>
 		</a>
 	</div>
+</div>
 </div>
 </body>
 </html>

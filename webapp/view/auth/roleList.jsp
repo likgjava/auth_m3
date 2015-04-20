@@ -11,7 +11,7 @@
 			<th data-options="field:'roleName',width:80">角色名称</th>
 			<th data-options="field:'roleChName',width:80">角色名称</th>
 			<th data-options="field:'roleDesc',width:80, formatter:showTip">角色名称</th>
-			<th data-options="field:'createTime',width:80">创建时间</th>
+			<th data-options="field:'createTime',width:80, formatter:formatDate">创建时间</th>
 			<th data-options="field:'oper',width:80, formatter:addOper">操作</th>
 		</tr>
 	</thead>

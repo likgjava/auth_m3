@@ -6,3 +6,4 @@
 <script type="text/javascript" src="${path}/js/jquery/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="${path}/js/jquery/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${path}/js/jquery/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${path}/js/common.js"></script>

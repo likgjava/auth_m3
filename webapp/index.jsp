@@ -1,15 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/view/common/taglibs.jsp" %>
-<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>买卖宝后台管理系统</title>
-	<link rel="stylesheet" type="text/css" href="${path}/js/jquery/easyui/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="${path}/js/jquery/easyui/themes/icon.css">
-	<script type="text/javascript" src="${path}/js/jquery/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="${path}/js/jquery/easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="${path}/js/jquery/easyui/locale/easyui-lang-zh_CN.js"></script>
+<%@ include file="/view/common/head.jsp" %>
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north',split:true" style="height:80px;">
