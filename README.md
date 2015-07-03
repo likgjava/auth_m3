@@ -28,3 +28,5 @@ MySQL 5.1.22
 1、在使用jackson的@JsonIgnore和@JsonProperty注解时，不起作用。
 原因：jackson的jar包版本不兼容所导致，因为jackson 1.x与jackson 2.x的jar包结构发生很大变化。
 解决：全部使用jackson 2.x版本的jar即可正常。
+
+2、使用aop功能时需添加aspectjweaver-1.8.6.jar

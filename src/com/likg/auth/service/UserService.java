@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.likg.auth.dao.UserMapper;
 import com.likg.auth.domain.EasyuiPage;
 import com.likg.auth.domain.User;
-import com.likg.framework.DynamicDataSource;
 
 @Service
 public class UserService {
@@ -28,7 +27,6 @@ public class UserService {
 			page.setResult(userList);
 		}
 		
-		DynamicDataSource.setRoute(DynamicDataSource.SLAVE);
 		Integer maxId = userMapper.getMaxGoodsId();
 		System.out.println("maxId==="+maxId);
 		
