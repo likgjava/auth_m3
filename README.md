@@ -3,7 +3,7 @@ auth_mmb3
 
 NOTE
 =========
-实现动态切换数据源
+实现动态切换数据源，需要手动进行切换DynamicDataSource.setRoute(DynamicDataSource.SLAVE);
 
 技术实现
 =========
