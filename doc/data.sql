@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50018
 File Encoding         : 65001
 
-Date: 2015-08-14 18:14:01
+Date: 2015-08-14 18:44:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,6 +36,9 @@ CREATE TABLE `auth_menu` (
 -- ----------------------------
 -- Records of auth_menu
 -- ----------------------------
+INSERT INTO `auth_menu` VALUES ('1', '0', '1', '1111', null, null, '0', null, null, null);
+INSERT INTO `auth_menu` VALUES ('2', '1', '2', '33333', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('3', '0', '1', '444', null, null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for auth_resource
