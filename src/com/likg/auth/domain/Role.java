@@ -2,6 +2,8 @@ package com.likg.auth.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 //AUTH_ROLE
 public class Role implements Serializable {
@@ -27,6 +29,8 @@ public class Role implements Serializable {
 	//@Temporal(TemporalType.TIMESTAMP)
 	//@Column(name="CREATE_TIME")
 	private Timestamp createTime;
+	
+	private Set<Resource> resourceSet = new HashSet<Resource>();
 
 	public int getId() {
 		return id;
@@ -66,6 +70,14 @@ public class Role implements Serializable {
 
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
+	}
+
+	public Set<Resource> getResourceSet() {
+		return resourceSet;
+	}
+
+	public void setResourceSet(Set<Resource> resourceSet) {
+		this.resourceSet = resourceSet;
 	}
 	
 }

@@ -2,11 +2,24 @@ package com.likg.auth.domain;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class User {
+/**
+ * 用户对象
+ * 添加Spring Security功能，需要实现UserDetails接口
+ * @author likaige
+ * @create 2015年8月13日 上午9:35:30
+ */
+public class User implements UserDetails {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 记录号
@@ -43,6 +56,18 @@ public class User {
 	 * 角色列表
 	 */
 	private List<Role> roleList = new ArrayList<Role>();
+	
+	/**重写Spring security中UserDetails的方法*/
+	//@Transient
+	private Set<GrantedAuthority> authorities;
+	//@Transient
+	private boolean accountNonExpired;
+	//@Transient
+	private boolean accountNonLocked;
+	//@Transient
+	private boolean credentialsNonExpired;
+	//@Transient
+	private boolean enabled;
 
 	public int getId() {
 		return id;
@@ -98,6 +123,64 @@ public class User {
 
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
+	}
+	
+	
+
+	public void setAuthorities(Set<GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -9,5 +9,6 @@
 	
 	<import resource="conf/spring-mybatis.xml" />
 	<import resource="conf/spring-aop.xml" />
+	<import resource="conf/spring-security.xml" />
 	
 </beans>

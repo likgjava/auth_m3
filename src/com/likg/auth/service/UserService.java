@@ -1,8 +1,8 @@
 package com.likg.auth.service;
 
+import java.util.HashMap;
 import java.util.List;
-
-import javax.annotation.Resource;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
@@ -10,12 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.likg.auth.dao.UserMapper;
 import com.likg.auth.domain.EasyuiPage;
+import com.likg.auth.domain.Resource;
+import com.likg.auth.domain.Role;
 import com.likg.auth.domain.User;
 
 @Service
 public class UserService {
 	
-	@Resource
+	@javax.annotation.Resource
 	private UserMapper userMapper;
 	
 	public EasyuiPage<User> getPage(EasyuiPage<User> page, User user) throws Exception {
@@ -64,6 +66,43 @@ public class UserService {
 
 	public void delete(int id) throws Exception {
 		userMapper.deleteUser(id);
+	}
+
+
+	public User getUserByUserName(String username) {
+		List<Map<String, Object>> list = userMapper.getUserByUserName(username);
+		
+		if(list.isEmpty()){
+			return null;
+		}
+		
+		User user = new User();
+		Map<Integer, Role> roleMap = new HashMap<Integer, Role>();
+		for(Map<String, Object> map : list){
+			Integer id = (Integer) map.get("id");
+			Integer resId = (Integer) map.get("resId");
+			Integer roleId = (Integer) map.get("role_id");
+			String res_name = (String) map.get("res_name");
+			String res_url = (String) map.get("res_url");
+			
+			user.setId(id);
+			user.setUserName(username);
+			
+			Role r = null;
+			if(!roleMap.containsKey(roleId)){
+				r = new Role();
+				r.setId(roleId);
+				roleMap.put(roleId, r);
+			}
+			r = roleMap.get(roleId);
+			
+			Resource res = new Resource();
+			res.setId(resId);
+			r.getResourceSet().add(res);
+		}
+		
+		user.getRoleList().addAll(roleMap.values());
+		return user;
 	}
 
 	

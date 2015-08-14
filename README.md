@@ -30,3 +30,19 @@ MySQL 5.1.22
 解决：全部使用jackson 2.x版本的jar即可正常。
 
 2、使用aop功能时需添加aspectjweaver-1.8.6.jar
+
+3、20180814
+添加Spring Security功能，主要修改地方包括：
+在web.xml中配置org.springframework.web.filter.DelegatingFilterProxy过滤器。
+添加spring-security.xml
+新增的jar包：
+spring-security-acl-3.2.8.RELEASE.jar
+spring-security-config-3.2.8.RELEASE.jar
+spring-security-core-3.2.8.RELEASE.jar
+spring-security-taglibs-3.2.8.RELEASE.jar
+spring-security-web-3.2.8.RELEASE.jar
+
+4.引入jquery.form.js插件
+
+
+

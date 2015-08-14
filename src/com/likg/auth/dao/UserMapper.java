@@ -1,6 +1,7 @@
 package com.likg.auth.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
@@ -33,5 +34,7 @@ public interface UserMapper {
 
 	@DataSource(DynamicDataSource.SLAVE)
 	public Integer getMaxGoodsId();
+
+	public List<Map<String, Object>> getUserByUserName(String username);
 	
 }
