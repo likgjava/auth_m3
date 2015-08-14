@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.likg.auth.dao.MenuMapper">
+
+	<resultMap id="userMap1" type="com.likg.auth.domain.User">
+		<result property="id" column="id" />
+		<result property="userName" column="user_name" />
+		<result property="password" column="password" />
+		<result property="realName" column="real_name" />
+		<result property="status" column="status" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+	<select id="getMenuList" resultType="com.likg.auth.domain.Menu">
+		select m.id,m.menu_name,m.is_leaf,r.res_url
+		from auth_menu m
+		join auth_resource r on m.res_id=r.id
+		where m.parent_id=#{pid}
+	</select>
+	
+	
+</mapper>

@@ -63,7 +63,7 @@
 	
 	
 	<select id="getUserByUserName" resultType="map">
-		SELECT u.id,u.user_name,ur.role_id,r.id resId,r.res_name,r.res_url
+		SELECT u.id,u.user_name,u.password,ur.role_id,r.id resId,r.res_name,r.res_url
 		FROM auth_user u
 		JOIN auth_user_role ur on u.id=ur.user_id
 		JOIN auth_role_resource rr on rr.role_id=ur.role_id

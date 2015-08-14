@@ -16,7 +16,7 @@
 	<http pattern="/**/*.ico" security="none" />
 	<http pattern="/**/*.swf" security="none" />
 	<http pattern="/view/resource/**" security="none" />
-	<http pattern="/view/auth/login/login.jsp" security="none" />
+	<http pattern="/login.jsp" security="none" />
 	<http pattern="/to_index.jsp" security="none" />
 	<http pattern="/jcaptcha" security="none" />
 	
@@ -57,7 +57,7 @@
 	<!-- 登录验证器 -->
 	<beans:bean id="loginFilter" class="com.likg.security.MyUsernamePasswordAuthenticationFilter">
 		<beans:property name="filterProcessesUrl" value="/j_spring_security_check"></beans:property>
-		<beans:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"></beans:property>
+		<beans:property name="authenticationSuccessHandler" ref="successHandler"></beans:property>
 		<beans:property name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler"></beans:property>
 		<beans:property name="authenticationManager" ref="myAuthenticationManager"></beans:property>
 
@@ -66,18 +66,17 @@
 			<beans:ref bean="captchaService" />
 		</beans:property> -->
 	</beans:bean>
-	<beans:bean id="loginLogAuthenticationSuccessHandler"
-		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+	<beans:bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
 		<beans:property name="defaultTargetUrl" value="/LoginController.do?method=login"></beans:property>
 	</beans:bean>
 	<beans:bean id="simpleUrlAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-		<beans:property name="defaultFailureUrl" value="/view/auth/login/login.jsp"></beans:property>
+		<beans:property name="defaultFailureUrl" value="/login.jsp"></beans:property>
 	</beans:bean>
 	
 	<!-- 未登录的切入点 -->
 	<beans:bean id="loginUrlAuthEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<beans:property name="loginFormUrl" value="/view/auth/login/login.jsp"></beans:property>
+		<beans:property name="loginFormUrl" value="/login.jsp"></beans:property>
 	</beans:bean>
 	
 	

@@ -69,8 +69,9 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
+	@ResponseBody
 	@RequestMapping(params="method=login")
-	public ModelAndView login(HttpServletRequest request) throws Exception {
+	public Map<String, Object> login(HttpServletRequest request) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		//获取当前用户的信息
@@ -80,7 +81,7 @@ public class LoginController {
 		//把当前用户的信息放到session中
 		request.getSession().setAttribute("user", user);
 		
-		return new ModelAndView(Constants.JSON_VIEW, model);
+		return model;
 	}
 	
 	/**

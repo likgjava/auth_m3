@@ -82,11 +82,13 @@ public class UserService {
 			Integer id = (Integer) map.get("id");
 			Integer resId = (Integer) map.get("resId");
 			Integer roleId = (Integer) map.get("role_id");
-			String res_name = (String) map.get("res_name");
-			String res_url = (String) map.get("res_url");
+			String resName = (String) map.get("res_name");
+			String resUrl = (String) map.get("res_url");
+			String password = (String) map.get("password");
 			
 			user.setId(id);
 			user.setUserName(username);
+			user.setPassword(password);
 			
 			Role r = null;
 			if(!roleMap.containsKey(roleId)){
@@ -98,6 +100,8 @@ public class UserService {
 			
 			Resource res = new Resource();
 			res.setId(resId);
+			res.setResName(resName);
+			res.setResUrl(resUrl);
 			r.getResourceSet().add(res);
 		}
 		
