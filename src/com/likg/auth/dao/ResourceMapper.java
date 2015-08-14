@@ -16,6 +16,8 @@ public interface ResourceMapper {
 	
 
 	public List<Resource> getResourceList();
+
+	public List<Resource> getResourceListByParentId(int i);
 	
 	
 }

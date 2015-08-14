@@ -7,20 +7,14 @@
 <body>
 
 <div style="margin: 5px;">
-<table id="dataList" class="easyui-datagrid" title="用户列表"
-	url='${path}/UserController/getPage.do'
-	data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:10,method:'post',toolbar:'#tb',fitColumns:true">
-	<thead>
-		<tr>
-			<th data-options="field:'id',width:80">ID</th>
-			<th data-options="field:'userName',width:80">用户名</th>
-			<th data-options="field:'realName',width:80">姓名</th>
-			<th data-options="field:'status',width:80">状态</th>
-			<th data-options="field:'createTime',width:80">创建时间</th>
-			<th data-options="field:'oper', formatter:addOper">操作</th>
-		</tr>
-	</thead>
-</table>
+
+<div style="width: 200px;">
+<ul id="menuTree" data-options="url:'${path}/ResourceController/getResourceTree.do',method:'get',animate:true"></ul>
+</div>
+
+
+
+
 
 <div id="tb" style="height:auto">
 	<table style="width:100%;">
@@ -54,6 +48,15 @@
 </html>
 
 <script type="text/javascript">
+$(function(){
+	$('#menuTree').tree({
+		onClick: function(node){
+			document.getElementById('mainFrame').src = '${path}'+node.url;
+		}
+	});
+});
+
+
 //自适应窗口宽度
 $(window).resize(function(){
 	$('#dataList').datagrid('resize');

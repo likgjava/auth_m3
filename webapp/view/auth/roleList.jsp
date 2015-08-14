@@ -1,5 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/view/common/taglibs.jsp" %>
+<html>
+<head>
+<%@ include file="/view/common/head.jsp" %>
+</head>
+<body>
 
 <div style="margin: 5px;">
 <table id="roleDataList" class="easyui-datagrid" title="角色列表"
@@ -35,6 +40,8 @@
 </div>
 </div>
 
+</body>
+</html>
 <script type="text/javascript">
 //自适应窗口宽度
 $(window).resize(function(){

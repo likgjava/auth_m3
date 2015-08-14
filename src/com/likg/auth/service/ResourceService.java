@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.likg.auth.dao.ResourceMapper;
+import com.likg.auth.domain.Menu;
 import com.likg.auth.domain.Resource;
 
 @Service
@@ -15,5 +16,9 @@ public class ResourceService  {
 	public List<Resource> getResourceList(){
 		List<Resource> list =this.resourceMapper.getResourceList(); 
 		return list;
+	}
+
+	public List<Resource> getResourceList(Integer parentId) {
+		return resourceMapper.getResourceListByParentId(parentId==null ? 0 : parentId);
 	}
 }
