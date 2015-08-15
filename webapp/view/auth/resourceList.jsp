@@ -13,37 +13,20 @@
 </div>
 
 
-
-
-
-<div id="tb" style="height:auto">
-	<table style="width:100%;">
-		<tr>
-			<td>
-				用户名: <input id="userName" name="userName" />
-				<a href="javascript:;" onclick="searchData();" class="easyui-linkbutton" iconCls="icon-search">搜 索</a>
-			</td>
-			<td align="right">
-				<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-add" plain="false" onclick="openFormDialog();">新增用户</a>
-			</td>
-		</tr>
-	</table>
+<div class="box-positon">
+	<form class="ropt">
+		<input type="button" id="addResourceBut" class="submit" value="新增" /> &nbsp; 
+		<input type="button" id="updateResourceBut" class="reset" value="修改" /> &nbsp; 
+		<input type="button" id="deleteResourceBut" class="del-button" value="删除" /> &nbsp; 
+	</form>
+	<div class="clear"></div>
 </div>
 
-<!-- 详情弹出窗口 -->
-<div id="userDetailDialog" class="easyui-dialog" closed="true" buttons="#userDetailDialog-buttons"></div>
-<div id="userDetailDialog-buttons">
-	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userDetailDialog').dialog('close')">关闭</a>
+<div id="resourceInfo" style="float: left; width:79%;">
 </div>
 
-<!-- 表单弹出窗口 -->
-<div id="userFormDialog" class="easyui-dialog" closed="true" buttons="#userFormDialog-buttons"></div>
-<div id="userFormDialog-buttons">
-	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
-	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userFormDialog').dialog('close')">取消</a>
-</div>
-</div>
 
+</div>
 </body>
 </html>
 
@@ -51,7 +34,64 @@
 $(function(){
 	$('#menuTree').tree({
 		onClick: function(node){
-			document.getElementById('mainFrame').src = '${path}'+node.url;
+			$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: node.id});
+		}
+	});
+	
+	//新增子节点
+	$('#addResourceBut').click(function(){
+		//var id = ResourceTree.getSelectedItemId();
+		var node = $('#menuTree').tree('getSelected');
+		if(node==null){
+			alert('请选择要修改的节点！'); return ;
+		}
+		var id = node.id;
+		var data = {};
+		if(id > 0){
+			data.parentId = id;
+		}
+
+		//获取节点的层级数
+		//data.resourceLevel = ResourceTree.getLevel(id);
+		
+		$('#resourceInfo').load('${path}/ResourceController/toResourceFormView.do', data);
+	});
+
+	//修改
+	$('#updateResourceBut').click(function(){
+		var id = ResourceTree.getSelectedItemId();
+		if(id==null || id==''){
+			alert('请选择要修改的节点！'); return ;
+		}else if(id == '-1'){
+			alert('该节点不能修改！'); return ;
+		}
+		$('#resourceInfo').load($('#initPath').val()+'/ResourceController.do?method=toResourceFormView', {objId:id});
+	});
+	
+	//删除
+	$('#deleteResourceBut').click(function(){
+		var id = ResourceTree.getSelectedItemId();
+		var msg = '确认删除该节点及其子节点吗？';
+		if(id == '-1'){
+			msg = '确认删除所有资源节点吗？';
+		}
+		if(confirm(msg)){
+			$.getJSON($('#initPath').val()+'/ResourceController.do?method=removeAll', {objId: (id=='-1'?'':id)}, function(json){
+				if(json.success){
+					if(id != '-1'){
+						var parentId = ResourceTree.getParentId(id);
+						//选中父节点
+						ResourceTree.selectItem(parentId);
+						//刷新树节点
+						ResourceTree.refreshItem(parentId);
+						//刷新表单域
+						$('#resourceInfo').load($('#initPath').val()+'/ResourceController.do?method=toResourceDetailView', {objId: parentId});
+					}else{
+						//刷新树节点
+						ResourceTree.refreshItem('-1');
+					}
+				}
+			});
 		}
 	});
 });

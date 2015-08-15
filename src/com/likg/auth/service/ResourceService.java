@@ -21,4 +21,12 @@ public class ResourceService  {
 	public List<Resource> getResourceList(Integer parentId) {
 		return resourceMapper.getResourceListByParentId(parentId==null ? 0 : parentId);
 	}
+
+	public Resource get(int id) {
+		return resourceMapper.get(id);
+	}
+
+	public void saveResource(Resource resource) {
+		resourceMapper.saveResource(resource);
+	}
 }

@@ -18,6 +18,10 @@ public interface ResourceMapper {
 	public List<Resource> getResourceList();
 
 	public List<Resource> getResourceListByParentId(int i);
+
+	public Resource get(int id);
+
+	public void saveResource(Resource resource);
 	
 	
 }

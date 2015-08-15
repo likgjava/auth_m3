@@ -15,11 +15,18 @@
 		select * from auth_resource
 	</select>
 	
+	<select id="get" resultType="com.likg.auth.domain.Resource">
+		select * from auth_resource t where t.id=#{pid}
+	</select>
+	
 	<select id="getResourceListByParentId" resultType="com.likg.auth.domain.Resource">
 		select t.*
 		from auth_resource t
 		where t.parent_id=#{pid}
 	</select>
 	
+	<select id="save" parameterType="com.likg.auth.domain.Resource">
+		insert into auth_resource() values()
+	</select>
 	
 </mapper>
