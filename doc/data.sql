@@ -2,21 +2,21 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local_db
-Source Server Version : 50018
-Source Host           : localhost:3306
+Source Server Version : 50022
+Source Host           : 127.0.0.1:3306
 Source Database       : mmb
 
 Target Server Type    : MYSQL
-Target Server Version : 50018
+Target Server Version : 50022
 File Encoding         : 65001
 
-Date: 2015-08-14 18:44:29
+Date: 2015-08-15 22:50:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for auth_menu
+-- Table structure for `auth_menu`
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_menu`;
 CREATE TABLE `auth_menu` (
@@ -36,12 +36,12 @@ CREATE TABLE `auth_menu` (
 -- ----------------------------
 -- Records of auth_menu
 -- ----------------------------
-INSERT INTO `auth_menu` VALUES ('1', '0', '1', '1111', null, null, '0', null, null, null);
-INSERT INTO `auth_menu` VALUES ('2', '1', '2', '33333', null, null, '1', null, null, null);
-INSERT INTO `auth_menu` VALUES ('3', '0', '1', '444', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('1', '0', '3', '资源列表', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('2', '0', '2', '角色列表', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('3', '0', '1', '用户管理', null, null, '1', null, null, null);
 
 -- ----------------------------
--- Table structure for auth_resource
+-- Table structure for `auth_resource`
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_resource`;
 CREATE TABLE `auth_resource` (
@@ -60,11 +60,12 @@ CREATE TABLE `auth_resource` (
 -- ----------------------------
 -- Records of auth_resource
 -- ----------------------------
-INSERT INTO `auth_resource` VALUES ('1', '0', '用户管理', '1', null, null, null, null, null);
-INSERT INTO `auth_resource` VALUES ('2', '0', '2222', '22', null, null, null, null, null);
+INSERT INTO `auth_resource` VALUES ('1', '0', '用户管理', '/UserController/toList.do', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('2', '0', '角色列表', '/RoleController/toList.do', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('3', '0', '资源列表', '/ResourceController/toList.do', null, null, '1', null, null);
 
 -- ----------------------------
--- Table structure for auth_role
+-- Table structure for `auth_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_role`;
 CREATE TABLE `auth_role` (
@@ -82,7 +83,7 @@ CREATE TABLE `auth_role` (
 INSERT INTO `auth_role` VALUES ('1', 'admin', 'fdsafsadf', 'fsadf', null);
 INSERT INTO `auth_role` VALUES ('2', 'test', null, null, null);
 INSERT INTO `auth_role` VALUES ('3', 'manager', '发到付', '退货需知，一经穿过拒绝退换，尽量用申通寄回！\r\n退货地址:浙江省台州市路桥区章苑新村23幢101室 陈峰 15967655559 \r\n退回写张纸条，写明退货原因和旺旺ID，中通快递，平邮和到付拒收', '2015-04-14 15:26:51');
-INSERT INTO `auth_role` VALUES ('4', 'aa', '????', '?????', '2015-04-14 15:29:48');
+INSERT INTO `auth_role` VALUES ('4', 'aa', '111', '11111', '2015-04-14 15:29:48');
 INSERT INTO `auth_role` VALUES ('5', '111', '???', '???', '2015-04-14 15:30:53');
 INSERT INTO `auth_role` VALUES ('6', '12', '????', '??????', '2015-04-14 15:32:36');
 INSERT INTO `auth_role` VALUES ('7', '4324', '类型', '发的', '2015-04-14 15:35:47');
@@ -92,7 +93,7 @@ INSERT INTO `auth_role` VALUES ('10', 'fas', '范德萨发', 'fdsafsdfsadf范德
 INSERT INTO `auth_role` VALUES ('11', 'dfas', 'fdsa', 'fasdfasf', '2015-04-24 13:41:50');
 
 -- ----------------------------
--- Table structure for auth_role_resource
+-- Table structure for `auth_role_resource`
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_role_resource`;
 CREATE TABLE `auth_role_resource` (
@@ -108,7 +109,7 @@ INSERT INTO `auth_role_resource` VALUES ('1', '1');
 INSERT INTO `auth_role_resource` VALUES ('1', '2');
 
 -- ----------------------------
--- Table structure for auth_user
+-- Table structure for `auth_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_user`;
 CREATE TABLE `auth_user` (
@@ -130,7 +131,7 @@ INSERT INTO `auth_user` VALUES ('2', 'test', '1', null, null, null);
 INSERT INTO `auth_user` VALUES ('3', 'java', '1', null, null, null);
 
 -- ----------------------------
--- Table structure for auth_user_role
+-- Table structure for `auth_user_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_user_role`;
 CREATE TABLE `auth_user_role` (
