@@ -8,11 +8,15 @@
 
 <div style="margin: 5px;">
 
-<div style="width: 200px;">
-<ul id="menuTree" data-options="url:'${path}/ResourceController/getResourceTree.do',method:'get',animate:true"></ul>
+<div class="" style="float: left;width: 200px; border: 1px solid #95b8e7;">
+<ul id="menuTree" data-options="method:'get',animate:true">
+	<li>
+		<span>aaaa</span>
+	</li>
+</ul>
 </div>
 
-
+<div style="float: left; min-width: 500px;">
 <div class="box-positon">
 	<form class="ropt">
 		<input type="button" id="addResourceBut" class="submit" value="新增" /> &nbsp; 
@@ -22,9 +26,9 @@
 	<div class="clear"></div>
 </div>
 
-<div id="resourceInfo" style="float: left; width:79%;">
+<div id="resourceInfo" style="">
 </div>
-
+</div>
 
 </div>
 </body>
@@ -33,6 +37,7 @@
 <script type="text/javascript">
 $(function(){
 	$('#menuTree').tree({
+		url:'${path}/ResourceController/getResourceTree.do',
 		onClick: function(node){
 			$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: node.id});
 		}
@@ -47,7 +52,7 @@ $(function(){
 		}
 		var id = node.id;
 		var data = {};
-		if(id > 0){
+		if(id != '0'){
 			data.parentId = id;
 		}
 
@@ -59,36 +64,47 @@ $(function(){
 
 	//修改
 	$('#updateResourceBut').click(function(){
-		var id = ResourceTree.getSelectedItemId();
-		if(id==null || id==''){
+		var node = $('#menuTree').tree('getSelected');
+		if(node==null){
 			alert('请选择要修改的节点！'); return ;
-		}else if(id == '-1'){
+		}else if(node.id == '0'){
 			alert('该节点不能修改！'); return ;
 		}
-		$('#resourceInfo').load($('#initPath').val()+'/ResourceController.do?method=toResourceFormView', {objId:id});
+		$('#resourceInfo').load('${path}/ResourceController/toResourceFormView.do', {objId:id});
 	});
 	
 	//删除
 	$('#deleteResourceBut').click(function(){
-		var id = ResourceTree.getSelectedItemId();
+		var node = $('#menuTree').tree('getSelected');
+		if(node==null){
+			alert('请选择要删除的节点！'); return ;
+		}
+		var id = node.id;
 		var msg = '确认删除该节点及其子节点吗？';
 		if(id == '-1'){
 			msg = '确认删除所有资源节点吗？';
 		}
+		
+		
+		
 		if(confirm(msg)){
-			$.getJSON($('#initPath').val()+'/ResourceController.do?method=removeAll', {objId: (id=='-1'?'':id)}, function(json){
+			$.getJSON('${path}/ResourceController/removeAll.do', {id: (id=='-1'?'':id)}, function(json){
 				if(json.success){
 					if(id != '-1'){
-						var parentId = ResourceTree.getParentId(id);
+						//var parentId = $('#menuTree').tree('getParent', node.target).id;
+						var node = $('#menuTree').tree('getSelected');
+						var pnode = $('#menuTree').tree('getParent', node.target);
 						//选中父节点
-						ResourceTree.selectItem(parentId);
+						$('#menuTree').tree('select', pnode.target);
 						//刷新树节点
-						ResourceTree.refreshItem(parentId);
+						$('#menuTree').tree('reload', pnode.target);
 						//刷新表单域
-						$('#resourceInfo').load($('#initPath').val()+'/ResourceController.do?method=toResourceDetailView', {objId: parentId});
+						$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: pnode.id});
 					}else{
 						//刷新树节点
-						ResourceTree.refreshItem('-1');
+						//ResourceTree.refreshItem('-1');
+						var node = $('#menuTree').tree('find', 0);
+						$('#menuTree').tree('reload', node.target);
 					}
 				}
 			});

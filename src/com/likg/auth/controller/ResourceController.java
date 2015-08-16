@@ -37,10 +37,19 @@ public class ResourceController {
 	
 	@ResponseBody
 	@RequestMapping("getResourceTree")
-	public List<Map<String, String>> getResourceTree(Integer id){
+	public List<Map<String, String>> getResourceTree(String id){
 		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
 		
-		List<Resource> menuList = resourceService.getResourceList(id);
+		if(id == null){
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("id", "0");
+			map.put("text", "资源树");
+			map.put("state", "closed");
+			list.add(map);
+			return list;
+		}
+		
+		List<Resource> menuList = resourceService.getResourceList("0".equals(id) ? null : id);
 		for(Resource r : menuList){
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("id", r.getId()+"");
@@ -56,7 +65,7 @@ public class ResourceController {
 	
 	
 	@RequestMapping("toResourceFormView")
-	public ModelAndView toResourceFormView(Integer id, Integer parentId, HttpServletRequest request) throws Exception {
+	public ModelAndView toResourceFormView(String id, String parentId, HttpServletRequest request) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		Resource resource = null;
@@ -68,6 +77,7 @@ public class ResourceController {
 			if(parentId != null) {
 				Resource parentResource = resourceService.get(parentId);
 				resource.setParent(parentResource);
+				resource.setParentId(parentId);
 			}
 			
 			//设置层级
@@ -88,7 +98,7 @@ public class ResourceController {
 	 * @throws Exception
 	 */
 	@RequestMapping("toResourceDetailView")
-	public ModelAndView toResourceDetailView(int id, HttpServletRequest request) throws Exception {
+	public ModelAndView toResourceDetailView(String id, HttpServletRequest request) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		Resource resource = resourceService.get(id);
@@ -116,15 +126,16 @@ public class ResourceController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(params="method=removeAll")
-	public ModelAndView removeAll(String objId, HttpServletRequest request) throws Exception {
+	@ResponseBody
+	@RequestMapping("removeAll")
+	public Map<String, Object> removeAll(String id, HttpServletRequest request) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		//删除节点及其所有子孙节点
-		//resourceService.removeAll(objId);
+		resourceService.removeAll(id);
 		model.put(Constants.SUCCESS, true);
 		
-		return new ModelAndView(Constants.JSON_VIEW, model);
+		return model;
 	}
 	
 	

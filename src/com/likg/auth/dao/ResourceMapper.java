@@ -17,11 +17,17 @@ public interface ResourceMapper {
 
 	public List<Resource> getResourceList();
 
-	public List<Resource> getResourceListByParentId(int i);
+	public List<Resource> getResourceListByParentId(String pid);
 
-	public Resource get(int id);
+	public Resource get(String id);
 
-	public void saveResource(Resource resource);
+	public void save(Resource resource);
+
+	public void update(Resource parentResource);
+
+	public void update2(Resource oldResource);
+
+	public void removeAll(String id);
 	
 	
 }

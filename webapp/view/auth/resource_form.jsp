@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/view/common/taglibs.jsp" %>
 
-<form id="resourceForm" action="${path}/ResourceController.do?method=save" method="post">
+<form id="resourceForm" action="${path}/ResourceController/save.do" method="post">
 	<input type="hidden" id="resourceObjId" name="id" value="${resource.id }" />
-	<input type="hidden" id="parentResourceObjId" name="parent.id" value="${resource.parent.id }" />
+	<input type="hidden" id="parentResourceObjId" name="parentId" value="${resource.parentId }" />
 	<input type="hidden" name="treeLevel" value="${resource.treeLevel }" />
 	<table cellspacing="1" cellpadding="2" border="0" width="100%" class="pn-ftable" style="font-size:13px;">
 	<tbody>
@@ -24,7 +24,7 @@
 			<td width="88%" class="pn-fcontent" colspan="3"><textarea maxlength="255" name="resDesc" rows="4" cols="60">${resource.resDesc }</textarea></td>
 		</tr>
 		<tr>
-			<td class="pn-fbutton" colspan="4"><input type="submit" class="submit" value="提交" /> &nbsp; <input type="reset" class="reset" value="重置" /></td>
+			<td class="pn-fbutton" colspan="4"><input type="button" onclick="submit22();" class="submit" value="提交" /> &nbsp; <input type="reset" class="reset" value="重置" /></td>
 		</tr>
 	</tbody>
 	</table>
@@ -33,42 +33,44 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	//验证表单
-	$("#resourceForm").validate();
+	//$("#resourceForm").validate();
 
-	//提交表单
-	$('#resourceForm').submit(function(){
-		//if(!$('#resourceForm').valid()){return;}
-		$(this).ajaxSubmit({
-			dataType: 'json',
-			success: function(json){
-				if(json.success){
-					var resourceObjId = $('#resourceObjId').val();
-					//修改
-					if(resourceObjId){
-						//更新节点名称
-						ResourceTree.setItemText(resourceObjId, $('input[name=resName]', '#resourceForm').val(), '');
-						//刷新表单域
-						$('#resourceInfo').load('${path}/ResourceController.do?method=toResourceDetailView', {objId: resourceObjId});
-					}
-					//新增
-					else{
-						//刷新树节点
-						ResourceTree.refreshItem(ResourceTree.getSelectedItemId());
-						//刷新表单域
-						$('#resourceInfo').load('${path}/ResourceController.do?method=toResourceDetailView', {objId: ResourceTree.getSelectedItemId()});
-					}
-				}else{
-					alert(json.result);
+
+});
+
+function submit22(){
+	//alert(1)
+	$('#resourceForm').ajaxSubmit({
+		dataType: 'json',
+		success: function(json){
+			if(json.success){
+				var resourceObjId = $('#resourceObjId').val();
+				//修改
+				if(resourceObjId){
+					//更新节点名称
+					ResourceTree.setItemText(resourceObjId, $('input[name=resName]', '#resourceForm').val(), '');
+					//刷新表单域
+					$('#resourceInfo').load('${path}/ResourceController.do?method=toResourceDetailView', {objId: resourceObjId});
 				}
-			},
-			error: function(msg){
-				alert(msg);
+				//新增
+				else{
+					//刷新表单域
+					var node = $('#menuTree').tree('getSelected');
+					$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: node.id});
+					
+					//刷新树节点
+					//ResourceTree.refreshItem(ResourceTree.getSelectedItemId());
+					$('#menuTree').tree('reload', node.target);
+					
+				}
+			}else{
+				alert(json.result);
 			}
-		});
-
-		//(重要)always return false to prevent standard browser submit and page navigation 
-		return false;
+		},
+		error: function(msg){
+			alert(msg);
+		}
 	});
+}
 
-} );
 </script>

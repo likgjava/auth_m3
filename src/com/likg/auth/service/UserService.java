@@ -80,7 +80,7 @@ public class UserService {
 		Map<Integer, Role> roleMap = new HashMap<Integer, Role>();
 		for(Map<String, Object> map : list){
 			Integer id = (Integer) map.get("id");
-			Integer resId = (Integer) map.get("resId");
+			String resId = (String) map.get("resId");
 			Integer roleId = (Integer) map.get("role_id");
 			String resName = (String) map.get("res_name");
 			String resUrl = (String) map.get("res_url");

@@ -9,7 +9,10 @@ public class Resource {
 	private static final long serialVersionUID = 1L;
 
 	/**记录号*/
-	private int id;
+	private String id;
+	
+	/**记录号*/
+	private String parentId;
 	
 	/**父资源*/
 	private Resource parent;
@@ -40,12 +43,20 @@ public class Resource {
 
 	private Set<Resource> children = new HashSet<Resource>();
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int objId) {
+	public void setId(String objId) {
 		this.id = objId;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
 	public Resource getParent() {

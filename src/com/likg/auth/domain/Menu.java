@@ -9,7 +9,10 @@ public class Menu {
 	private static final long serialVersionUID = 1638300741655156017L;
 
 	/**记录号*/
-	private int id;
+	private String id;
+	
+	/**记录号*/
+	private String parentId;
 	
 	/**父菜单*/
 	private Menu parent;
@@ -40,11 +43,19 @@ public class Menu {
 	
 	private Set<Menu> children = new HashSet<Menu>();
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public void setId(String id) {
 		this.id = id;
 	}
 

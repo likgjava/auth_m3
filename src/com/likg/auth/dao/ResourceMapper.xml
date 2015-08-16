@@ -19,14 +19,27 @@
 		select * from auth_resource t where t.id=#{pid}
 	</select>
 	
-	<select id="getResourceListByParentId" resultType="com.likg.auth.domain.Resource">
+	<select id="getResourceListByParentId" parameterType="string" resultType="com.likg.auth.domain.Resource">
 		select t.*
 		from auth_resource t
-		where t.parent_id=#{pid}
+		where 
+		<if test="_parameter == null">t.parent_id is null</if>
+		<if test="_parameter != null">t.parent_id=#{pid}</if>
 	</select>
 	
 	<select id="save" parameterType="com.likg.auth.domain.Resource">
-		insert into auth_resource() values()
+		insert into auth_resource(id,parent_id,res_name,res_url,is_leaf) values(#{id},#{parentId},#{resName},#{resUrl},#{isLeaf})
+	</select>
+	
+	<select id="update" parameterType="com.likg.auth.domain.Resource">
+		update auth_resource set is_leaf=#{isLeaf} where id=#{id}
+	</select>
+	<select id="update2" parameterType="com.likg.auth.domain.Resource">
+		update auth_resource set res_name=#{resName},res_url=#{resUrl} where id=#{id}
+	</select>
+	
+	<select id="removeAll" parameterType="string">
+		delete from auth_resource where id like concat(#{value},'%')
 	</select>
 	
 </mapper>
