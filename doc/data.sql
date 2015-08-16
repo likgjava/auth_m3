@@ -2,25 +2,25 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local_db
-Source Server Version : 50022
-Source Host           : 127.0.0.1:3306
+Source Server Version : 50018
+Source Host           : localhost:3306
 Source Database       : mmb
 
 Target Server Type    : MYSQL
-Target Server Version : 50022
+Target Server Version : 50018
 File Encoding         : 65001
 
-Date: 2015-08-15 22:50:29
+Date: 2015-08-16 14:33:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `auth_menu`
+-- Table structure for auth_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_menu`;
 CREATE TABLE `auth_menu` (
-  `id` int(11) NOT NULL auto_increment COMMENT '记录号',
+  `id` varchar(11) NOT NULL COMMENT '记录号',
   `parent_id` varchar(50) default NULL COMMENT '父菜单',
   `res_id` varchar(50) default NULL COMMENT '关联资源',
   `menu_name` varchar(20) NOT NULL COMMENT '菜单名称',
@@ -36,16 +36,16 @@ CREATE TABLE `auth_menu` (
 -- ----------------------------
 -- Records of auth_menu
 -- ----------------------------
-INSERT INTO `auth_menu` VALUES ('1', '0', '3', '资源列表', null, null, '1', null, null, null);
-INSERT INTO `auth_menu` VALUES ('2', '0', '2', '角色列表', null, null, '1', null, null, null);
-INSERT INTO `auth_menu` VALUES ('3', '0', '1', '用户管理', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('M01', '0', 'R03', '资源列表', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('M02', '0', 'R02', '角色列表', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('M03', '0', 'R01', '用户管理', null, null, '1', null, null, null);
 
 -- ----------------------------
--- Table structure for `auth_resource`
+-- Table structure for auth_resource
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_resource`;
 CREATE TABLE `auth_resource` (
-  `id` int(11) NOT NULL auto_increment COMMENT '记录号',
+  `id` varchar(11) NOT NULL COMMENT '记录号',
   `parent_id` varchar(50) default NULL COMMENT '父资源',
   `res_name` varchar(50) NOT NULL COMMENT '资源名称',
   `res_url` varchar(100) NOT NULL COMMENT '资源路径',
@@ -60,12 +60,18 @@ CREATE TABLE `auth_resource` (
 -- ----------------------------
 -- Records of auth_resource
 -- ----------------------------
-INSERT INTO `auth_resource` VALUES ('1', '0', '用户管理', '/UserController/toList.do', null, null, '1', null, null);
-INSERT INTO `auth_resource` VALUES ('2', '0', '角色列表', '/RoleController/toList.do', null, null, '1', null, null);
-INSERT INTO `auth_resource` VALUES ('3', '0', '资源列表', '/ResourceController/toList.do', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R01', null, '用户管理', '/UserController/toList.do', null, null, '0', null, null);
+INSERT INTO `auth_resource` VALUES ('R0102', null, '33', '33', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R0103', null, '33', '33', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R0104', 'R01', '7', '7', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R02', null, '角色列表', '/RoleController/toList.do', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R03', null, '资源列表', '/ResourceController/toList.do', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R04', null, 'fasd', 'fsad', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R05', null, '发送', '1', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R06', null, '2', '2', null, null, '1', null, null);
 
 -- ----------------------------
--- Table structure for `auth_role`
+-- Table structure for auth_role
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_role`;
 CREATE TABLE `auth_role` (
@@ -93,23 +99,23 @@ INSERT INTO `auth_role` VALUES ('10', 'fas', '范德萨发', 'fdsafsdfsadf范德
 INSERT INTO `auth_role` VALUES ('11', 'dfas', 'fdsa', 'fasdfasf', '2015-04-24 13:41:50');
 
 -- ----------------------------
--- Table structure for `auth_role_resource`
+-- Table structure for auth_role_resource
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_role_resource`;
 CREATE TABLE `auth_role_resource` (
   `role_id` int(11) NOT NULL COMMENT '角色id',
-  `res_id` int(11) NOT NULL COMMENT '资源id',
+  `res_id` varchar(50) NOT NULL COMMENT '资源id',
   PRIMARY KEY  (`role_id`,`res_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='角色资源中间表';
 
 -- ----------------------------
 -- Records of auth_role_resource
 -- ----------------------------
-INSERT INTO `auth_role_resource` VALUES ('1', '1');
-INSERT INTO `auth_role_resource` VALUES ('1', '2');
+INSERT INTO `auth_role_resource` VALUES ('1', 'R01');
+INSERT INTO `auth_role_resource` VALUES ('1', 'R02');
 
 -- ----------------------------
--- Table structure for `auth_user`
+-- Table structure for auth_user
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_user`;
 CREATE TABLE `auth_user` (
@@ -131,7 +137,7 @@ INSERT INTO `auth_user` VALUES ('2', 'test', '1', null, null, null);
 INSERT INTO `auth_user` VALUES ('3', 'java', '1', null, null, null);
 
 -- ----------------------------
--- Table structure for `auth_user_role`
+-- Table structure for auth_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `auth_user_role`;
 CREATE TABLE `auth_user_role` (
