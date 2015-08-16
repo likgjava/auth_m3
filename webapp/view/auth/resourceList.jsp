@@ -70,7 +70,7 @@ $(function(){
 		}else if(node.id == '0'){
 			alert('该节点不能修改！'); return ;
 		}
-		$('#resourceInfo').load('${path}/ResourceController/toResourceFormView.do', {objId:id});
+		$('#resourceInfo').load('${path}/ResourceController/toResourceFormView.do', {id: node.id});
 	});
 	
 	//删除

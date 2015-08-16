@@ -48,9 +48,11 @@ function submit22(){
 				//修改
 				if(resourceObjId){
 					//更新节点名称
-					ResourceTree.setItemText(resourceObjId, $('input[name=resName]', '#resourceForm').val(), '');
+					//ResourceTree.setItemText(resourceObjId, $('input[name=resName]', '#resourceForm').val(), '');
+					var node = $('#menuTree').tree('getSelected');
+					$('#menuTree').tree('update', {target: node.target, text: $('input[name=resName]').val()});
 					//刷新表单域
-					$('#resourceInfo').load('${path}/ResourceController.do?method=toResourceDetailView', {objId: resourceObjId});
+					$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: resourceObjId});
 				}
 				//新增
 				else{

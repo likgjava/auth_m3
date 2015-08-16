@@ -47,7 +47,7 @@ public class ResourceService  {
 			//保存节点对象
 			resource.setIsLeaf(true);
 			if(StringUtils.isBlank(parentId)) {
-				resource.setParent(null);
+				resource.setParentId(null);
 			}
 			String prefix = (StringUtils.isBlank(parentId) ? TreeSequenceUtil.RESOURCE_PREFIX : parentId);
 			resource.setId(treeSequenceUtil.getSequenceNo(Resource.class, prefix));
