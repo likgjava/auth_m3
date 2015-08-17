@@ -8,14 +8,11 @@
 
 <div style="margin: 5px;">
 
-<input type="button" id="addResourceBut" class="submit" value="新增" /> &nbsp; 
-<input type="button" id="updateResourceBut" class="reset" value="修改" /> &nbsp; 
+<input type="button" id="addResourceBut" class="submit" value="保存" /> &nbsp; 
+<a href="${path}/RoleController/toList.do">返回</a>
 
 <div class="" style="width: 200px; border: 1px solid #95b8e7;">
 <ul id="menuTree" data-options="method:'get',animate:true">
-	<li>
-		<span>aaaa</span>
-	</li>
 </ul>
 </div>
 
@@ -28,6 +25,7 @@
 $(function(){
 	$('#menuTree').tree({
 		url:'${path}/RoleController/getRoleResourceList.do?roleId=${role.id}',
+		checkbox: true,
 		onClick: function(node){
 			//$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: node.id});
 		}
@@ -36,32 +34,26 @@ $(function(){
 	//新增子节点
 	$('#addResourceBut').click(function(){
 		//var id = ResourceTree.getSelectedItemId();
-		var node = $('#menuTree').tree('getSelected');
-		if(node==null){
-			alert('请选择要修改的节点！'); return ;
-		}
-		var id = node.id;
+		var nodes = $('#menuTree').tree('getChecked');
 		var data = {};
-		if(id != '0'){
-			data.parentId = id;
+		var roleId = ${role.id};
+		var resIds = [];
+		for(var i=0; i<nodes.length; i++){
+			var node = nodes[i];
+			resIds.push(node.id);
 		}
-
-		//获取节点的层级数
-		//data.resourceLevel = ResourceTree.getLevel(id);
 		
-		$('#resourceInfo').load('${path}/ResourceController/toResourceFormView.do', data);
+		
+		$.getJSON('${path}/RoleController/allotResource.do', {roleId:roleId, resIds:resIds.toString()}, function(json){
+			if(json.success){
+				window.location.href = '${path}/RoleController/toList.do';
+			}else{
+				alert(json.result);
+			}
+		});
+
 	});
 
-	//修改
-	$('#updateResourceBut').click(function(){
-		var node = $('#menuTree').tree('getSelected');
-		if(node==null){
-			alert('请选择要修改的节点！'); return ;
-		}else if(node.id == '0'){
-			alert('该节点不能修改！'); return ;
-		}
-		$('#resourceInfo').load('${path}/ResourceController/toResourceFormView.do', {id: node.id});
-	});
 	
 	//删除
 	$('#deleteResourceBut').click(function(){
@@ -78,26 +70,7 @@ $(function(){
 		
 		
 		if(confirm(msg)){
-			$.getJSON('${path}/ResourceController/removeAll.do', {id: (id=='-1'?'':id)}, function(json){
-				if(json.success){
-					if(id != '-1'){
-						//var parentId = $('#menuTree').tree('getParent', node.target).id;
-						var node = $('#menuTree').tree('getSelected');
-						var pnode = $('#menuTree').tree('getParent', node.target);
-						//选中父节点
-						$('#menuTree').tree('select', pnode.target);
-						//刷新树节点
-						$('#menuTree').tree('reload', pnode.target);
-						//刷新表单域
-						$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: pnode.id});
-					}else{
-						//刷新树节点
-						//ResourceTree.refreshItem('-1');
-						var node = $('#menuTree').tree('find', 0);
-						$('#menuTree').tree('reload', node.target);
-					}
-				}
-			});
+			
 		}
 	});
 });

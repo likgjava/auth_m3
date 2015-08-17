@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50018
 File Encoding         : 65001
 
-Date: 2015-08-16 14:33:57
+Date: 2015-08-17 17:02:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,9 +36,10 @@ CREATE TABLE `auth_menu` (
 -- ----------------------------
 -- Records of auth_menu
 -- ----------------------------
-INSERT INTO `auth_menu` VALUES ('M01', '0', 'R03', '资源列表', null, null, '1', null, null, null);
-INSERT INTO `auth_menu` VALUES ('M02', '0', 'R02', '角色列表', null, null, '1', null, null, null);
-INSERT INTO `auth_menu` VALUES ('M03', '0', 'R01', '用户管理', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('M01', null, 'R03', '资源列表', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('M02', null, 'R02', '角色列表', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('M03', null, 'R01', '用户管理', null, null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('M04', null, 'R04', '菜单管理', null, null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for auth_resource
@@ -66,7 +67,7 @@ INSERT INTO `auth_resource` VALUES ('R0103', null, '33', '33', null, null, '1', 
 INSERT INTO `auth_resource` VALUES ('R0104', 'R01', '7', '7', null, null, '1', null, null);
 INSERT INTO `auth_resource` VALUES ('R02', null, '角色列表', '/RoleController/toList.do', null, null, '1', null, null);
 INSERT INTO `auth_resource` VALUES ('R03', null, '资源列表', '/ResourceController/toList.do', null, null, '1', null, null);
-INSERT INTO `auth_resource` VALUES ('R04', null, 'fasd', 'fsad', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R04', null, '菜单管理', '/MenuController/toList.do', null, null, '1', null, null);
 INSERT INTO `auth_resource` VALUES ('R05', null, '发送', '1', null, null, '1', null, null);
 INSERT INTO `auth_resource` VALUES ('R06', null, '2', '2', null, null, '1', null, null);
 
@@ -90,7 +91,7 @@ INSERT INTO `auth_role` VALUES ('1', 'admin', 'fdsafsadf', 'fsadf', null);
 INSERT INTO `auth_role` VALUES ('2', 'test', null, null, null);
 INSERT INTO `auth_role` VALUES ('3', 'manager', '发到付', '退货需知，一经穿过拒绝退换，尽量用申通寄回！\r\n退货地址:浙江省台州市路桥区章苑新村23幢101室 陈峰 15967655559 \r\n退回写张纸条，写明退货原因和旺旺ID，中通快递，平邮和到付拒收', '2015-04-14 15:26:51');
 INSERT INTO `auth_role` VALUES ('4', 'aa', '111', '11111', '2015-04-14 15:29:48');
-INSERT INTO `auth_role` VALUES ('5', '111', '???', '???', '2015-04-14 15:30:53');
+INSERT INTO `auth_role` VALUES ('5', '111', '???', 'fsf', '2015-04-14 15:30:53');
 INSERT INTO `auth_role` VALUES ('6', '12', '????', '??????', '2015-04-14 15:32:36');
 INSERT INTO `auth_role` VALUES ('7', '4324', '类型', '发的', '2015-04-14 15:35:47');
 INSERT INTO `auth_role` VALUES ('8', '111', '好的', '发送大方', '2015-04-14 15:38:06');
@@ -113,6 +114,11 @@ CREATE TABLE `auth_role_resource` (
 -- ----------------------------
 INSERT INTO `auth_role_resource` VALUES ('1', 'R01');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R02');
+INSERT INTO `auth_role_resource` VALUES ('1', 'R03');
+INSERT INTO `auth_role_resource` VALUES ('10', 'R0102');
+INSERT INTO `auth_role_resource` VALUES ('10', 'R0103');
+INSERT INTO `auth_role_resource` VALUES ('11', 'R0103');
+INSERT INTO `auth_role_resource` VALUES ('11', 'R02');
 
 -- ----------------------------
 -- Table structure for auth_user

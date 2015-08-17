@@ -136,24 +136,7 @@ public class ResourceController {
 	}
 	
 	
-	/**
-	 * 分配角色，保存用户角色信息
-	 * @param userId 用户id
-	 * @param roleIds 角色ids
-	 * @param request
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(params="method=allotResource")
-	public ModelAndView allotResource(String roleId, String[] resIds, HttpServletRequest request) throws Exception {
-		Map<String, Object> model = new HashMap<String, Object>();
-		
-		//分配资源
-		//resourceService.allotResource(roleId, resIds);
-		model.put(Constants.SUCCESS, true);
-		
-		return new ModelAndView(Constants.JSON_VIEW, model);
-	}
+	
 	
 	
 	@RequestMapping("toAllotResourceView")

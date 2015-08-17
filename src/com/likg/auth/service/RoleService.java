@@ -59,6 +59,15 @@ public class RoleService {
 	public List<Role> getRoleListByUser(int userId) {
 		return roleMapper.getRoleListByUser(userId);
 	}
+
+	@Transactional
+	public void allotResource(int roleId, String[] resIds) {
+		roleMapper.deleteRoleResource(roleId);
+		for(String resId : resIds){
+			roleMapper.saveRoleResource(roleId, resId);
+		}
+		
+	}
 	
 	
 

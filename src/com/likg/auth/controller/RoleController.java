@@ -1,6 +1,7 @@
 package com.likg.auth.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -22,6 +24,7 @@ import com.likg.auth.domain.Resource;
 import com.likg.auth.domain.Role;
 import com.likg.auth.service.ResourceService;
 import com.likg.auth.service.RoleService;
+import com.likg.common.Constants;
 
 @Controller
 @RequestMapping("/RoleController")
@@ -132,8 +135,8 @@ public class RoleController {
 	@ResponseBody
 	@RequestMapping("/getRoleResourceList")
 	public Collection<EasyuiTree> getRoleResourceList(Integer roleId) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		Map<String, EasyuiTree> map = new HashMap<String, EasyuiTree>();
+		List<EasyuiTree> list = new ArrayList<EasyuiTree>(); 
+		
 		try {
 			
 			List<Resource> allResourceList = resourceService.getAllResourceList();
@@ -143,7 +146,7 @@ public class RoleController {
 				roleResourceIdSet.add(r.getId());
 			}
 			
-			
+			Map<String, EasyuiTree> map = new HashMap<String, EasyuiTree>();
 			EasyuiTree root = new EasyuiTree();
 			root.setId("0");
 			root.setText("资源树");
@@ -164,11 +167,12 @@ public class RoleController {
 				}
 			}
 			
+			list.add(root);
 			
 		} catch (Exception e) {
 			log.error("出现异常：", e);
 		}
-		return map.values();
+		return list;
 	}
 	
 	/**
@@ -209,6 +213,27 @@ public class RoleController {
 			log.error("出现异常：", e);
 		}
 		model.put("result", result);
+		return model;
+	}
+	
+	
+	/**
+	 * 分配角色，保存用户角色信息
+	 * @param userId 用户id
+	 * @param roleIds 角色ids
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping("allotResource")
+	public Map<String, Object> allotResource(int roleId, String[] resIds, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		//分配资源
+		roleService.allotResource(roleId, resIds);
+		model.put(Constants.SUCCESS, true);
+		
 		return model;
 	}
 	

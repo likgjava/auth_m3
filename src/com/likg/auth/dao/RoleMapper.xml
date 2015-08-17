@@ -41,6 +41,9 @@
 	<delete id="deleteUserRole" parameterType="int">
 		delete from auth_user_role where role_id=#{id}
 	</delete>
+	<delete id="deleteRoleResource" parameterType="int">
+		delete from auth_role_resource where role_id=#{id}
+	</delete>
 	
 	<select id="getPage" parameterType="com.likg.auth.domain.Role" resultMap="roleMap">
 		select id,role_name,role_ch_name,role_desc,create_time from auth_role 
@@ -53,5 +56,9 @@
 		where 1=1
 			<if test="roleName!=null and roleName!=''">and role_name like CONCAT('%',#{roleName},'%')</if>
 	</select>
+	
+	<insert id="saveRoleResource">
+		insert into auth_role_resource(role_id,res_id) values(#{0},#{1})
+	</insert>
 	
 </mapper>

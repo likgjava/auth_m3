@@ -1,9 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/view/common/taglibs.jsp" %>
-<ul>
-  <li><a href="javascript:;" onclick="showPage('用户列表','${path}/UserController/toList.do')">用户列表</a></li>
-  <li><a href="javascript:;" onclick="showPage('角色列表','${path}/RoleController/toList.do')">角色列表</a></li>
-</ul>
 
 <ul id="menuTree" data-options="url:'${path}/MenuController/getMenuTree.do',method:'get',animate:true"></ul>
 

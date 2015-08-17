@@ -33,5 +33,9 @@ public interface RoleMapper {
 
 	public List<Role> getRoleListByUser(int userId);
 
+	public void deleteRoleResource(int roleId);
+
+	public void saveRoleResource(int roleId, String resId);
+
 	
 }
