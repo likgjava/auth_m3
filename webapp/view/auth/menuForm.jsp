@@ -52,7 +52,7 @@ function openFormDialog2(id){
 	$("#userFormDialog").dialog({
 		title: '选择菜单关联资源',
 		href: url,
-		width: 300,
+		width: 250,
 		height: 300,
 		closed: false,
 		cache: false,
