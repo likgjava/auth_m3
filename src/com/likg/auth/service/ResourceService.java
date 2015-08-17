@@ -71,7 +71,15 @@ public class ResourceService  {
 	@Transactional
 	public void removeAll(String objId) throws Exception {
 		//删除节点及其所有子孙节点
-		treeSequenceUtil.removeAll(objId, null);
+		treeSequenceUtil.removeAll(objId, "auth_resource");
 		
+	}
+
+	public List<Resource> getAllResourceList() {
+		return resourceMapper.getAllResourceList();
+	}
+
+	public List<Resource> getResourceListByRole(Integer roleId) {
+		return resourceMapper.getResourceListByRole(roleId);
 	}
 }

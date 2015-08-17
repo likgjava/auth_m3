@@ -18,6 +18,9 @@ public class Menu {
 	private Menu parent;
 	
 	/**关联资源*/
+	private String resId;
+	
+	/**关联资源*/
 	private Resource resource;
 	
 	/**菜单名称*/
@@ -53,6 +56,14 @@ public class Menu {
 
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getResId() {
+		return resId;
+	}
+
+	public void setResId(String resId) {
+		this.resId = resId;
 	}
 
 	public void setId(String id) {

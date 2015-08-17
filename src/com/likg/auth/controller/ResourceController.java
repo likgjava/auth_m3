@@ -57,9 +57,6 @@ public class ResourceController {
 			map.put("state", r.getIsLeaf() ? "open" : "closed");
 			list.add(map);
 		}
-		
-		
-		
 		return list;
 	}
 	
@@ -157,4 +154,19 @@ public class ResourceController {
 		
 		return new ModelAndView(Constants.JSON_VIEW, model);
 	}
+	
+	
+	@RequestMapping("toAllotResourceView")
+	public ModelAndView toAllotResourceView(String roleId, String[] resIds, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		//分配资源
+		//resourceService.allotResource(roleId, resIds);
+		model.put(Constants.SUCCESS, true);
+		
+		return new ModelAndView("view/auth/allotResource", model);
+	}
+	
+	
+	
 }

@@ -57,6 +57,7 @@ function addOper(val,row){
 	var operHtml = '';
 	operHtml += '<a class="oper" href="#" onclick="openFormDialog('+row.id+')">修改</a>&nbsp;';
 	operHtml += '<a class="oper" href="javascript:;" onclick="deleteRole('+row.id+')">删除</a>&nbsp;';
+	operHtml += '<a class="oper" href="${path}/RoleController/toRoleResourceList.do?roleId='+row.id+'">分配权限</a>&nbsp;';
 	return operHtml;
 }
 
@@ -75,6 +76,19 @@ function openFormDialog(id){
 		href: url,
 		width: 350,
 		height: 200,
+		closed: false,
+		cache: false,
+		modal: true
+	});
+}
+
+function allotResource(id){
+	var url = '${path}/ResourceController/toAllotResourceView.do';
+	$("#userFormDialog").dialog({
+		title: '选择菜单关联资源',
+		href: url,
+		width: 300,
+		height: 300,
 		closed: false,
 		cache: false,
 		modal: true

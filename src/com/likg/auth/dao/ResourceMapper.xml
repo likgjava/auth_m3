@@ -11,6 +11,17 @@
 		<result property="createTime" column="create_time" />
 	</resultMap>
 
+	<select id="getAllResourceList" resultType="com.likg.auth.domain.Resource">
+		select * from auth_resource
+	</select>
+	
+	<select id="getResourceListByRole" resultType="com.likg.auth.domain.Resource">
+		select t.*
+		from auth_resource t
+		join auth_role_resource rr on t.id=rr.res_id
+		where rr.role_id=#{roleId}
+	</select>
+	
 	<select id="getResourceList" resultType="com.likg.auth.domain.Resource">
 		select * from auth_resource
 	</select>

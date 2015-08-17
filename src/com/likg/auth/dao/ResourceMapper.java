@@ -28,6 +28,10 @@ public interface ResourceMapper {
 	public void update2(Resource oldResource);
 
 	public void removeAll(String id);
+
+	public List<Resource> getAllResourceList();
+
+	public List<Resource> getResourceListByRole(Integer roleId);
 	
 	
 }

@@ -1,10 +1,13 @@
 package com.likg.auth.controller;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -14,7 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.likg.auth.domain.EasyuiPage;
+import com.likg.auth.domain.EasyuiTree;
+import com.likg.auth.domain.Resource;
 import com.likg.auth.domain.Role;
+import com.likg.auth.service.ResourceService;
 import com.likg.auth.service.RoleService;
 
 @Controller
@@ -23,8 +29,10 @@ public class RoleController {
 	
 	private static Logger log = Logger.getLogger(RoleController.class);
 	
-	@Resource
+	@javax.annotation.Resource
 	private RoleService roleService;
+	@javax.annotation.Resource
+	private ResourceService resourceService;
 
 	/**
 	 * 跳转到列表页面
@@ -77,6 +85,90 @@ public class RoleController {
 			log.error("出现异常：", e);
 		}
 		return new ModelAndView("view/auth/roleForm", model);
+	}
+	
+	@RequestMapping("/toRoleResourceList")
+	public ModelAndView toRoleResourceList(Integer roleId) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		try {
+			
+			List<Resource> allResourceList = resourceService.getAllResourceList();
+			List<Resource> roleResourceList = resourceService.getResourceListByRole(roleId);
+			Set<String> roleResourceIdSet = new HashSet<String>();
+			for(Resource r : roleResourceList){
+				roleResourceIdSet.add(r.getId());
+			}
+			
+			Map<String, EasyuiTree> map = new HashMap<String, EasyuiTree>();
+			EasyuiTree root = new EasyuiTree();
+			root.setId("0");
+			root.setText("资源树");
+			map.put("0", root);
+			
+			
+			for(Resource r : allResourceList){
+				EasyuiTree tree = new EasyuiTree();
+				tree.setId(r.getId());
+				tree.setText(r.getResName());
+				tree.setChecked(roleResourceIdSet.contains(r.getId()));
+				map.put(r.getId(), tree);
+				
+				String parentId = r.getParentId()==null ? "0" : r.getParentId();
+				if(map.containsKey(parentId)){
+					EasyuiTree parent = map.get(parentId);
+					parent.getChildren().add(tree);
+				}
+			}
+			
+			
+			Role role = roleService.getRole(roleId);
+			model.put("role", role);
+		} catch (Exception e) {
+			log.error("出现异常：", e);
+		}
+		return new ModelAndView("view/auth/roleResourceList", model);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getRoleResourceList")
+	public Collection<EasyuiTree> getRoleResourceList(Integer roleId) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		Map<String, EasyuiTree> map = new HashMap<String, EasyuiTree>();
+		try {
+			
+			List<Resource> allResourceList = resourceService.getAllResourceList();
+			List<Resource> roleResourceList = resourceService.getResourceListByRole(roleId);
+			Set<String> roleResourceIdSet = new HashSet<String>();
+			for(Resource r : roleResourceList){
+				roleResourceIdSet.add(r.getId());
+			}
+			
+			
+			EasyuiTree root = new EasyuiTree();
+			root.setId("0");
+			root.setText("资源树");
+			map.put("0", root);
+			
+			
+			for(Resource r : allResourceList){
+				EasyuiTree tree = new EasyuiTree();
+				tree.setId(r.getId());
+				tree.setText(r.getResName());
+				tree.setChecked(roleResourceIdSet.contains(r.getId()));
+				map.put(r.getId(), tree);
+				
+				String parentId = r.getParentId()==null ? "0" : r.getParentId();
+				if(map.containsKey(parentId)){
+					EasyuiTree parent = map.get(parentId);
+					parent.getChildren().add(tree);
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			log.error("出现异常：", e);
+		}
+		return map.values();
 	}
 	
 	/**

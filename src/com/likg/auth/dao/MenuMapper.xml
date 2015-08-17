@@ -12,14 +12,43 @@
 	<resultMap id="resourceMap" type="com.likg.auth.domain.Resource">
 		<result property="id" column="res_id" />
 		<result property="resUrl" column="res_url" />
+		<result property="resName" column="res_name" />
 	</resultMap>
 
-	<select id="getMenuList" resultMap="menuMap">
+	<select id="getMenuList2" resultMap="menuMap">
 		select m.id,m.menu_name,m.is_leaf,r.res_url
 		from auth_menu m
 		join auth_resource r on m.res_id=r.id
-		where m.parent_id=#{pid}
+		where
+		<if test="_parameter == null">m.parent_id is null</if>
+		<if test="_parameter != null">m.parent_id=#{pid}</if>
 	</select>
 	
+	<select id="get" resultMap="menuMap">
+		select * 
+		from auth_Menu t
+		join auth_resource r on t.res_id=r.id
+		where t.id=#{pid}
+	</select>
+	
+	<select id="getMenuListByParentId" parameterType="string" resultType="com.likg.auth.domain.Menu">
+		select t.*
+		from auth_Menu t
+		where 
+		<if test="_parameter == null">t.parent_id is null</if>
+		<if test="_parameter != null">t.parent_id=#{pid}</if>
+	</select>
+	
+	<select id="save" parameterType="com.likg.auth.domain.Menu">
+		insert into auth_Menu(id,parent_id,menu_name,res_id,menu_desc,is_leaf) 
+		values(#{id},#{parentId},#{menuName},#{resId},#{menuDesc},#{isLeaf})
+	</select>
+	
+	<select id="update" parameterType="com.likg.auth.domain.Menu">
+		update auth_Menu set is_leaf=#{isLeaf} where id=#{id}
+	</select>
+	<select id="update2" parameterType="com.likg.auth.domain.Menu">
+		update auth_Menu set menu_name=#{menuName},res_id=#{resId} where id=#{id}
+	</select>
 	
 </mapper>
