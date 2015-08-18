@@ -7,6 +7,7 @@
 <body class="easyui-layout">
 	<div data-options="region:'north',split:true" style="height:60px;">
 		买卖宝...datasource
+		<a href="${path}//LoginController/logout.do">退出</a>
 	</div>
 	<div data-options="region:'west',title:'导航菜单',split:true" style="width:200px;">
 		<jsp:include page="/view/common/navigate.jsp" />

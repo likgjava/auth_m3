@@ -87,7 +87,7 @@ public class LoginController {
 	/**
 	 * 退出系统，并重定向到首页
 	 */
-	@RequestMapping(params="method=logout")
+	@RequestMapping("logout")
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//设置session失效
 		request.getSession().invalidate();
