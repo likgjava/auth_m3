@@ -28,8 +28,12 @@ public class MenuService {
 		return menuMapper.getMenuListByParentId(parentId);
 	}
 
-	public Menu get(String id) {
-		return menuMapper.get(id);
+	public Menu getMenu(String id) {
+		Menu menu = menuMapper.getMenu(id);
+		if(menu.getParentId() != null){
+			menu.setParent(menuMapper.getMenu(menu.getParentId()));
+		}
+		return menu;
 	}
 
 	public void saveMenu(Menu Menu) {
@@ -38,7 +42,7 @@ public class MenuService {
 			//修改父节点isLeaf的属性值
 			String parentId = Menu.getParentId();
 			if(!StringUtils.isBlank(parentId)) {
-				Menu parentMenu = menuMapper.get(parentId);
+				Menu parentMenu = menuMapper.getMenu(parentId);
 				if(parentMenu.getIsLeaf()) {
 					parentMenu.setIsLeaf(false);
 					menuMapper.update(parentMenu);
@@ -57,7 +61,7 @@ public class MenuService {
 		}
 		//修改
 		else {
-			Menu oldMenu = menuMapper.get(Menu.getId());
+			Menu oldMenu = menuMapper.getMenu(Menu.getId());
 			oldMenu.setMenuName(Menu.getMenuName());
 			oldMenu.setResId(Menu.getResId());
 			menuMapper.update2(oldMenu);

@@ -5,9 +5,9 @@
 	<resultMap id="menuMap" type="com.likg.auth.domain.Menu">
 		<result property="id" column="id" />
 		<result property="menuName" column="menu_name" />
+		<result property="parentId" column="parent_id" />
 		<result property="isLeaf" column="is_leaf" />
-		<association property="resource" resultMap="resourceMap" >
-		</association>
+		<association property="resource" resultMap="resourceMap" />
 	</resultMap>
 	<resultMap id="resourceMap" type="com.likg.auth.domain.Resource">
 		<result property="id" column="res_id" />
@@ -27,8 +27,8 @@
 		<if test="param1 != null">and m.parent_id=#{param1}</if>
 	</select>
 	
-	<select id="get" resultMap="menuMap">
-		select * 
+	<select id="getMenu" resultMap="menuMap">
+		select *
 		from auth_Menu t
 		join auth_resource r on t.res_id=r.id
 		where t.id=#{pid}

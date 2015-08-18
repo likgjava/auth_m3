@@ -9,6 +9,7 @@ import com.likg.auth.domain.Menu;
 @Repository
 public interface MenuMapper {
 	
+	Menu getMenu(String id);
 
 	public List<Menu> getResourceList();
 
@@ -18,7 +19,7 @@ public interface MenuMapper {
 
 	public List<Menu> getMenuListByParentId(String pid);
 
-	public Menu get(String id);
+	
 
 	public void save(Menu Menu);
 

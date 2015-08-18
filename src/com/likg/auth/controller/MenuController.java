@@ -12,29 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.likg.auth.domain.EasyuiTree;
 import com.likg.auth.domain.Menu;
 import com.likg.auth.domain.User;
 import com.likg.auth.service.MenuService;
 import com.likg.common.Constants;
 import com.likg.security.AuthenticationHelper;
 
-/**
- * @springmvc.view value="menuFormView" url="view/auth/menu/menu_form.jsp"
- * @springmvc.view value="menuDetailView" url="view/auth/menu/menu_detail.jsp"
- * @springmvc.view value="secondLevelMenuListView" url="/view/auth/desktop/left.jsp"
- *
- */
 @Controller
 @RequestMapping("/MenuController")
 public class MenuController {
+	
 	@javax.annotation.Resource
 	private MenuService menuService;
 	
+	/**
+	 * 跳转到‘菜单管理’页面
+	 * @return
+	 * @author likaige
+	 * @create 2015年8月18日 下午5:07:55
+	 */
 	@RequestMapping("/toList")
 	public String toList() {
 		return "view/auth/menuList";
 	}
-	
 	
 	/**
 	 * 获取导航菜单树
@@ -49,7 +50,6 @@ public class MenuController {
 		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
 		
 		User user = AuthenticationHelper.getCurrentUser();
-		
 		List<Menu> menuList = menuService.getNavigateMenuTree(id, user.getId());
 		for(Menu menu : menuList){
 			Map<String, String> map = new HashMap<String, String>();
@@ -59,31 +59,47 @@ public class MenuController {
 			map.put("url", menu.getResource().getResUrl());
 			list.add(map);
 		}
-		
 		return list;
 	}
 	
+	/**
+	 * 加载菜单树
+	 * @param id
+	 * @return
+	 * @author likaige
+	 * @create 2015年8月18日 下午5:17:20
+	 */
 	@ResponseBody
 	@RequestMapping("getMenuList")
-	public List<Map<String, String>> getMenuList(String id){
-		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+	public List<EasyuiTree> getMenuList(String id){
+		List<EasyuiTree> list = new ArrayList<EasyuiTree>();
 		
+		//首次加载
 		if(id == null){
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("id", "0");
-			map.put("text", "菜单树");
-			map.put("state", "closed");
-			list.add(map);
-			return list;
-		}
-		
-		List<Menu> menuList = menuService.getMenuList("0".equals(id) ? null : id);
-		for(Menu r : menuList){
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("id", r.getId()+"");
-			map.put("text", r.getMenuName());
-			map.put("state", r.getIsLeaf() ? "open" : "closed");
-			list.add(map);
+			EasyuiTree root = new EasyuiTree();
+			root.setId("0");
+			root.setText("菜单树");
+			root.setState("open");
+			list.add(root);
+			
+			//获取一级菜单
+			List<Menu> menuList = menuService.getMenuList(null);
+			for(Menu r : menuList){
+				EasyuiTree node = new EasyuiTree();
+				node.setId(r.getId()+"");
+				node.setText(r.getMenuName());
+				node.setState(r.getIsLeaf() ? "open" : "closed");
+				root.getChildren().add(node);
+			}
+		}else{
+			List<Menu> menuList = menuService.getMenuList("0".equals(id) ? null : id);
+			for(Menu r : menuList){
+				EasyuiTree node = new EasyuiTree();
+				node.setId(r.getId()+"");
+				node.setText(r.getMenuName());
+				node.setState(r.getIsLeaf() ? "open" : "closed");
+				list.add(node);
+			}
 		}
 		return list;
 	}
@@ -99,7 +115,7 @@ public class MenuController {
 			//获取父节点信息，若父节点id为空则增加一级节点
 			//String parentId = request.getParameter("parentId");
 			if(parentId != null) {
-				Menu parentMenu = menuService.get(parentId);
+				Menu parentMenu = menuService.getMenu(parentId);
 				Menu.setParent(parentMenu);
 				Menu.setParentId(parentId);
 			}
@@ -108,7 +124,7 @@ public class MenuController {
 			//Menu.setTreeLevel(Short.valueOf(request.getParameter("MenuLevel")));
 		}
 		else {
-			Menu = menuService.get(id);
+			Menu = menuService.getMenu(id);
 		}
 		model.put("menu", Menu);
 		
@@ -125,7 +141,7 @@ public class MenuController {
 	public ModelAndView toMenuDetailView(String id, HttpServletRequest request) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
-		Menu Menu = menuService.get(id);
+		Menu Menu = menuService.getMenu(id);
 		model.put("menu", Menu);
 		
 		return new ModelAndView("view/auth/menuDetail", model);

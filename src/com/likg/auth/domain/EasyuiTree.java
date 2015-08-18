@@ -9,6 +9,8 @@ public class EasyuiTree {
 	
 	private String text;
 	
+	private String state;
+	
 	private boolean checked;
 	
 	private List<EasyuiTree> children = new ArrayList<EasyuiTree>();
@@ -27,6 +29,14 @@ public class EasyuiTree {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public boolean isChecked() {
