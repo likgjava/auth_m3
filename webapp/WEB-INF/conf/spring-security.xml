@@ -7,7 +7,8 @@
 	<!-- 开启debug模式
 	<debug /> -->
 	
-	<http pattern="/**/*.js" security="none"  />
+	<http pattern="/**/*.js" security="none" />
+	<http pattern="/**/*.map" security="none" />
 	<http pattern="/**/*.css" security="none" />
 	<http pattern="/**/*.jpg" security="none" />
 	<http pattern="/**/*.jpeg" security="none" />

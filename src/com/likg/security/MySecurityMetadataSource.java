@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
-import com.likg.auth.dao.ResourceMapper;
 import com.likg.auth.domain.Resource;
 import com.likg.auth.service.ResourceService;
 
@@ -37,12 +37,10 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 
 
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -64,7 +62,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 				// 以权限名封装为Spring的security Object
 				ConfigAttribute configAttribute = new SecurityConfig(resource.getResName());
 				configAttributeList.add(configAttribute);
-				resourceMap.put("/" + resource.getResUrl(), configAttributeList);
+				resourceMap.put(resource.getResUrl(), configAttributeList);
 			}
 		}
 
@@ -84,9 +82,9 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 			loadResourceDefine();
 		}
 		
-		Collection<ConfigAttribute> s =resourceMap.get(requestUrl);
-		if("/view/auth/sys/desktop/index.jsp".equals(requestUrl)) {///view/auth/sys/desktop/index.jsp
-			//throw new AccessDeniedException(" 没有权限访问！ ");
+		Collection<ConfigAttribute> s = resourceMap.get(requestUrl);
+		if(s == null) {///view/auth/sys/desktop/index.jsp
+			throw new AccessDeniedException(" 没有权限访问！ ");
 		}
 		return s;
 	}

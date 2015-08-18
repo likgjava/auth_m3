@@ -19,8 +19,8 @@ public class MenuService {
 	@javax.annotation.Resource
 	private TreeSequenceUtil treeSequenceUtil;
 
-	public List<Menu> getMenuList2(String parentId) {
-		return menuMapper.getMenuList2(parentId);
+	public List<Menu> getNavigateMenuTree(String parentId, int userId) {
+		return menuMapper.getNavigateMenuTree(parentId, userId);
 	}
 	
 

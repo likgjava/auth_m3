@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.likg.auth.domain.Menu;
-import com.likg.auth.domain.Resource;
+import com.likg.auth.domain.User;
 import com.likg.auth.service.MenuService;
 import com.likg.common.Constants;
+import com.likg.security.AuthenticationHelper;
 
 /**
  * @springmvc.view value="menuFormView" url="view/auth/menu/menu_form.jsp"
@@ -35,12 +36,21 @@ public class MenuController {
 	}
 	
 	
+	/**
+	 * 获取导航菜单树
+	 * @param id 父节点的id
+	 * @return
+	 * @author likaige
+	 * @create 2015年8月18日 上午8:44:54
+	 */
 	@ResponseBody
-	@RequestMapping("getMenuTree")
-	public List<Map<String, String>> getMenuTree(String id){
+	@RequestMapping("getNavigateMenuTree")
+	public List<Map<String, String>> getNavigateMenuTree(String id){
 		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
 		
-		List<Menu> menuList = menuService.getMenuList2(id);
+		User user = AuthenticationHelper.getCurrentUser();
+		
+		List<Menu> menuList = menuService.getNavigateMenuTree(id, user.getId());
 		for(Menu menu : menuList){
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("id", menu.getId()+"");

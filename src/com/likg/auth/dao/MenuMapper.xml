@@ -15,13 +15,16 @@
 		<result property="resName" column="res_name" />
 	</resultMap>
 
-	<select id="getMenuList2" resultMap="menuMap">
+	<select id="getNavigateMenuTree" resultMap="menuMap">
 		select m.id,m.menu_name,m.is_leaf,r.res_url
-		from auth_menu m
-		join auth_resource r on m.res_id=r.id
-		where
-		<if test="_parameter == null">m.parent_id is null</if>
-		<if test="_parameter != null">m.parent_id=#{pid}</if>
+		from auth_user u
+		join auth_user_role ur on u.id=ur.user_id
+		join auth_role_resource rr on rr.role_id=ur.role_id
+		join auth_resource r on rr.res_id=r.id
+		join auth_menu m on m.res_id=r.id
+		where u.id=#{param2}
+		<if test="param1 == null">and m.parent_id is null</if>
+		<if test="param1 != null">and m.parent_id=#{param1}</if>
 	</select>
 	
 	<select id="get" resultMap="menuMap">

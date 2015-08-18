@@ -1,12 +1,13 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/view/common/taglibs.jsp" %>
 
-<ul id="menuTree" data-options="url:'${path}/MenuController/getMenuTree.do',method:'get',animate:true"></ul>
+<ul id="menuTree" data-options="method:'get',animate:true"></ul>
 
 
 <script type="text/javascript">
 $(function(){
 	$('#menuTree').tree({
+		url:'${path}/MenuController/getNavigateMenuTree.do',
 		onClick: function(node){
 			document.getElementById('mainFrame').src = '${path}'+node.url;
 		}

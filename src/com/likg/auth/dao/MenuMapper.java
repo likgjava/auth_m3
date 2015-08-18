@@ -12,7 +12,7 @@ public interface MenuMapper {
 
 	public List<Menu> getResourceList();
 
-	public List<Menu> getMenuList2(String parentId);
+	public List<Menu> getNavigateMenuTree(String parentId, int userId);
 	
 	
 
