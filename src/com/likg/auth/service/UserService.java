@@ -21,6 +21,11 @@ public class UserService {
 	private UserMapper userMapper;
 	
 	public EasyuiPage<User> getPage(EasyuiPage<User> page, User user) throws Exception {
+		
+		User user11 = this.userMapper.get(1);
+		System.out.println(user11);
+		
+		
 		Integer totalCount = userMapper.getCount(user);
 		page.setTotal(totalCount);
 		if(totalCount > 0) {

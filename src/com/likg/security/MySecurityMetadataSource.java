@@ -14,6 +14,7 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
 import com.likg.auth.domain.Resource;
+import com.likg.auth.domain.User;
 import com.likg.auth.service.ResourceService;
 
 /**
@@ -31,8 +32,6 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 	public MySecurityMetadataSource(ResourceService resourceService) {
 		this.resourceService = resourceService;
 		loadResourceDefine();
-		System.out.println(111);
-		System.out.println(222);
 	}
 
 
@@ -77,14 +76,21 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
 	 */
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
 		String requestUrl = ((FilterInvocation) object).getRequestUrl();
-		//System.out.println("requestUrl is " + requestUrl);
+		System.out.println("requestUrl is " + requestUrl);
 		if (resourceMap == null) {
 			loadResourceDefine();
 		}
 		
+		
+		
 		Collection<ConfigAttribute> s = resourceMap.get(requestUrl);
-		if(s == null) {///view/auth/sys/desktop/index.jsp
-			throw new AccessDeniedException(" 没有权限访问！ ");
+		if(s == null) {
+			User user = AuthenticationHelper.getCurrentUser();
+			if(user == null){
+				throw new AccessDeniedException(" 没有权限访问！ ");
+			}
+			
+			//throw new AccessDeniedException(" 没有权限访问！ ");
 		}
 		return s;
 	}

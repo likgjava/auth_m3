@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.likg.auth.dao.MenuMapper;
 import com.likg.auth.domain.Menu;
-import com.likg.core.util.TreeSequenceUtil;
+import com.likg.common.dao.TreeDao;
 
 @Service
 public class MenuService {
@@ -17,7 +17,7 @@ public class MenuService {
 	private MenuMapper menuMapper;
 	
 	@javax.annotation.Resource
-	private TreeSequenceUtil treeSequenceUtil;
+	private TreeDao treeDao;
 
 	public List<Menu> getNavigateMenuTree(String parentId, int userId) {
 		return menuMapper.getNavigateMenuTree(parentId, userId);
@@ -50,8 +50,8 @@ public class MenuService {
 			if(StringUtils.isBlank(parentId)) {
 				Menu.setParentId(null);
 			}
-			String prefix = (StringUtils.isBlank(parentId) ? TreeSequenceUtil.MENU_PREFIX : parentId);
-			Menu.setId(treeSequenceUtil.getSequenceNo(Menu.class, prefix));
+			String prefix = (StringUtils.isBlank(parentId) ? treeDao.MENU_PREFIX : parentId);
+			Menu.setId(treeDao.getSequenceNo("auth_menu", prefix));
 			menuMapper.save(Menu);
 			
 		}
@@ -71,7 +71,7 @@ public class MenuService {
 	@Transactional
 	public void removeAll(String objId) throws Exception {
 		//删除节点及其所有子孙节点
-		treeSequenceUtil.removeAll(objId, "auth_menu");
+		treeDao.removeAll(objId, "auth_menu");
 		
 	}
 	

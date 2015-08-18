@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.likg.auth.dao.ResourceMapper;
 import com.likg.auth.domain.Resource;
-import com.likg.core.util.TreeSequenceUtil;
+import com.likg.common.dao.TreeDao;
 
 @Service
 public class ResourceService  {
@@ -16,7 +16,7 @@ public class ResourceService  {
 	private ResourceMapper resourceMapper;
 	
 	@javax.annotation.Resource
-	private TreeSequenceUtil treeSequenceUtil;
+	private TreeDao treeDao;
 	
 	public List<Resource> getResourceList(){
 		List<Resource> list =this.resourceMapper.getResourceList(); 
@@ -49,8 +49,8 @@ public class ResourceService  {
 			if(StringUtils.isBlank(parentId)) {
 				resource.setParentId(null);
 			}
-			String prefix = (StringUtils.isBlank(parentId) ? TreeSequenceUtil.RESOURCE_PREFIX : parentId);
-			resource.setId(treeSequenceUtil.getSequenceNo(Resource.class, prefix));
+			String prefix = (StringUtils.isBlank(parentId) ? treeDao.RESOURCE_PREFIX : parentId);
+			resource.setId(treeDao.getSequenceNo("auth_resource", prefix));
 			resourceMapper.save(resource);
 			
 		}
@@ -71,7 +71,7 @@ public class ResourceService  {
 	@Transactional
 	public void removeAll(String objId) throws Exception {
 		//删除节点及其所有子孙节点
-		treeSequenceUtil.removeAll(objId, "auth_resource");
+		treeDao.removeAll(objId, "auth_resource");
 		
 	}
 

@@ -3,6 +3,7 @@ package com.likg.auth.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,10 @@ import com.likg.framework.annotation.DataSource;
 
 @Repository
 public interface UserMapper {
+	
+	@Select("SELECT * FROM auth_user WHERE id=#{id}")
+	User get(int id);
+
 	
 	public User getUser(int id);
 
