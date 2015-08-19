@@ -65,7 +65,9 @@
 		<property name="userService" ref="userService" />
 	</bean>
 	<bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-		<property name="defaultTargetUrl" value="/LoginController.do?method=login"></property>
+		<property name="defaultTargetUrl" value="/LoginController.do?method=login" />
+		<!-- 不自动跳转到登录前的页面 -->
+		<property name="alwaysUseDefaultTargetUrl" value="true" />
 	</bean>
 	<bean id="simpleUrlAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
