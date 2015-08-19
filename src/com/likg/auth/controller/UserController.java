@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.likg.auth.domain.EasyuiPage;
 import com.likg.auth.domain.Role;
 import com.likg.auth.domain.User;
 import com.likg.auth.service.RoleService;
 import com.likg.auth.service.UserService;
+import com.likg.common.domain.EasyuiPage;
 
 @Controller
 @RequestMapping("/UserController")

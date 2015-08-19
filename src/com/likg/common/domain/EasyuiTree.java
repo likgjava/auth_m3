@@ -1,4 +1,4 @@
-package com.likg.auth.domain;
+package com.likg.common.domain;
 
 import java.util.ArrayList;
 import java.util.List;

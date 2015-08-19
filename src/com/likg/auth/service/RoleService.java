@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.likg.auth.dao.RoleMapper;
-import com.likg.auth.domain.EasyuiPage;
 import com.likg.auth.domain.Role;
+import com.likg.common.domain.EasyuiPage;
 
 @Service
 public class RoleService {

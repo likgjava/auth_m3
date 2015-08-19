@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.likg.auth.domain.EasyuiPage;
-import com.likg.auth.domain.EasyuiTree;
 import com.likg.auth.domain.Resource;
 import com.likg.auth.domain.Role;
 import com.likg.auth.service.ResourceService;
 import com.likg.auth.service.RoleService;
 import com.likg.common.Constants;
+import com.likg.common.domain.EasyuiPage;
+import com.likg.common.domain.EasyuiTree;
 
 @Controller
 @RequestMapping("/RoleController")

@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.likg.auth.dao.UserMapper;
-import com.likg.auth.domain.EasyuiPage;
 import com.likg.auth.domain.Resource;
 import com.likg.auth.domain.Role;
 import com.likg.auth.domain.User;
+import com.likg.common.domain.EasyuiPage;
 
 @Service
 public class UserService {

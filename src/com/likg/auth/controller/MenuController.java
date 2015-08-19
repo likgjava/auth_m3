@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.likg.auth.domain.EasyuiTree;
 import com.likg.auth.domain.Menu;
 import com.likg.auth.domain.User;
 import com.likg.auth.service.MenuService;
 import com.likg.common.Constants;
+import com.likg.common.domain.EasyuiTree;
 import com.likg.security.AuthenticationHelper;
 
 @Controller
