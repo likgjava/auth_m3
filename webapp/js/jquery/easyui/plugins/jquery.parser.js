@@ -1,7 +1,7 @@
 /**
- * jQuery EasyUI 1.4
+ * jQuery EasyUI 1.4.3
  * 
- * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
  * To use it on other terms please contact us at info@jeasyui.com
@@ -9,7 +9,7 @@
  */
 (function($){
 $.parser={auto:true,onComplete:function(_1){
-},plugins:["draggable","droppable","resizable","pagination","tooltip","linkbutton","menu","menubutton","splitbutton","progressbar","tree","textbox","filebox","combo","combobox","combotree","combogrid","numberbox","validatebox","searchbox","spinner","numberspinner","timespinner","datetimespinner","calendar","datebox","datetimebox","slider","layout","panel","datagrid","propertygrid","treegrid","tabs","accordion","window","dialog","form"],parse:function(_2){
+},plugins:["draggable","droppable","resizable","pagination","tooltip","linkbutton","menu","menubutton","splitbutton","switchbutton","progressbar","tree","textbox","filebox","combo","combobox","combotree","combogrid","numberbox","validatebox","searchbox","spinner","numberspinner","timespinner","datetimespinner","calendar","datebox","datetimebox","slider","layout","panel","datagrid","propertygrid","treegrid","datalist","tabs","accordion","window","dialog","form"],parse:function(_2){
 var aa=[];
 for(var i=0;i<$.parser.plugins.length;i++){
 var _3=$.parser.plugins[i];
@@ -99,6 +99,9 @@ $(function(){
 var d=$("<div style=\"position:absolute;top:-1000px;width:100px;height:100px;padding:5px\"></div>").appendTo("body");
 $._boxModel=d.outerWidth()!=100;
 d.remove();
+d=$("<div style=\"position:fixed\"></div>").appendTo("body");
+$._positionFixed=(d.css("position")=="fixed");
+d.remove();
 if(!window.easyloader&&$.parser.auto){
 $.parser.parse();
 }
@@ -138,6 +141,11 @@ return this.each(function(){
 $(this).css({width:"",minWidth:"",maxWidth:"",height:"",minHeight:"",maxHeight:""});
 });
 }else{
+if(_14=="fit"){
+return this.each(function(){
+_16(this,this.tagName=="BODY"?$("body"):$(this).parent(),true);
+});
+}else{
 if(_14=="unfit"){
 return this.each(function(){
 _16(this,$(this).parent(),false);
@@ -149,6 +157,7 @@ return _17(this[0],_14);
 return this.each(function(){
 _17(this,_14,_15);
 });
+}
 }
 }
 }
@@ -166,6 +175,9 @@ $(this).removeClass("easyui-fluid");
 });
 }
 function _16(_19,_1a,fit){
+if(!_1a.length){
+return false;
+}
 var t=$(_19)[0];
 var p=_1a[0];
 var _1b=p.fcount||0;

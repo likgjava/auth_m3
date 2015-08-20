@@ -5,6 +5,7 @@
 <%@ include file="/view/common/head.jsp" %>
 </head>
 <body>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 <div style="margin: 5px;">
 <table id="dataList" class="easyui-datagrid" title="用户列表"
@@ -50,6 +51,10 @@
 </div>
 </div>
 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
 </body>
 </html>
 
@@ -62,8 +67,8 @@ $(window).resize(function(){
 //操作
 function addOper(val,row){
 	var operHtml = '';
-	operHtml += '<a class="oper" href="#" onclick="openDetailDialog('+row.id+')">查看</a>&nbsp;';
-	operHtml += '<a class="oper" href="#" onclick="openFormDialog('+row.id+')">修改</a>&nbsp;';
+	operHtml += '<a class="oper" href="javascript:;" onclick="openDetailDialog('+row.id+')">查看</a>&nbsp;';
+	operHtml += '<a class="oper" href="javascript:;" onclick="openFormDialog('+row.id+')">修改</a>&nbsp;';
 	operHtml += '<a class="oper" href="javascript:;" onclick="deleteUser('+row.id+')">删除</a>&nbsp;';
 	return operHtml;
 }

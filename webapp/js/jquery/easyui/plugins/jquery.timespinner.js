@@ -1,7 +1,7 @@
 /**
- * jQuery EasyUI 1.4
+ * jQuery EasyUI 1.4.3
  * 
- * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
  * To use it on other terms please contact us at info@jeasyui.com
@@ -10,7 +10,7 @@
 (function($){
 function _1(_2){
 var _3=0;
-if(_2.selectionStart){
+if(typeof _2.selectionStart=="number"){
 _3=_2.selectionStart;
 }else{
 if(_2.createTextRange){
@@ -23,7 +23,7 @@ _3=s.text.length;
 return _3;
 };
 function _5(_6,_7,_8){
-if(_6.selectionStart){
+if(_6.setSelectionRange){
 _6.setSelectionRange(_7,_8);
 }else{
 if(_6.createTextRange){
@@ -130,6 +130,11 @@ _e.call(this,e);
 },blur:function(e){
 var t=$(e.data.target);
 t.timespinner("setValue",t.timespinner("getText"));
+},keydown:function(e){
+if(e.keyCode==13){
+var t=$(e.data.target);
+t.timespinner("setValue",t.timespinner("getText"));
+}
 }}),formatter:function(_2c){
 if(!_2c){
 return "";
