@@ -16,12 +16,6 @@ import com.likg.auth.domain.Resource;
 import com.likg.auth.service.ResourceService;
 import com.likg.common.Constants;
 
-/**
- * @springmvc.view value="resourceFormView" url="view/auth/resource/resource_form.jsp"
- * @springmvc.view value="resourceDetailView" url="view/auth/resource/resource_detail.jsp"
- *
- */
-
 @Controller
 @RequestMapping("/ResourceController")
 public class ResourceController {
@@ -85,7 +79,7 @@ public class ResourceController {
 		}
 		model.put("resource", resource);
 		
-		return new ModelAndView("view/auth/resource_form", model);
+		return new ModelAndView("view/auth/resourceForm", model);
 	}
 	
 	/**
@@ -101,7 +95,7 @@ public class ResourceController {
 		Resource resource = resourceService.get(id);
 		model.put("resource", resource);
 		
-		return new ModelAndView("view/auth/resource_detail", model);
+		return new ModelAndView("view/auth/resourceDetail", model);
 	}
 	
 	@ResponseBody

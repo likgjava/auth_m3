@@ -19,6 +19,7 @@ import com.likg.auth.domain.User;
 import com.likg.auth.service.RoleService;
 import com.likg.auth.service.UserService;
 import com.likg.common.domain.EasyuiPage;
+import com.likg.common.domain.JsonResult;
 
 @Controller
 @RequestMapping("/UserController")
@@ -145,17 +146,15 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping("/delete")
-	public Map<String, Object> delete(int id) {
-		String result = "success";
-		Map<String, Object> model = new HashMap<String, Object>();
+	public JsonResult delete(int id) {
+		JsonResult result = JsonResult.getInstance();
 		try {
 			userService.delete(id);
 		} catch (Exception e) {
-			result = e.toString();
+			result = JsonResult.getFailResult(e.toString());
 			log.error("出现异常：", e);
 		}
-		model.put("result", result);
-		return model;
+		return result;
 	}
 	
 	/**

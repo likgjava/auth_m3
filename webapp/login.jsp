@@ -5,6 +5,8 @@
 <%@ include file="/view/common/head.jsp" %>
 <script type="text/javascript">
 $(function(){
+	$('#userName').focus();
+	
 	$('#loginForm').submit(function(){
 		var userName = $('#userName').val();
 		var password = $('#password').val();

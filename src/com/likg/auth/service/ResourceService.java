@@ -49,7 +49,7 @@ public class ResourceService  {
 			if(StringUtils.isBlank(parentId)) {
 				resource.setParentId(null);
 			}
-			String prefix = (StringUtils.isBlank(parentId) ? treeDao.RESOURCE_PREFIX : parentId);
+			String prefix = (StringUtils.isBlank(parentId) ? TreeDao.RESOURCE_PREFIX : parentId);
 			resource.setId(treeDao.getSequenceNo("auth_resource", prefix));
 			resourceMapper.save(resource);
 			

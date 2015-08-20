@@ -141,7 +141,7 @@ function saveUser(){
 //删除
 function deleteUser(id){
 	$.get('${path}/UserController/delete.do',{id:id},function(json){
-		if (json.result == 'success'){
+		if(json.success){
 			$('#dataList').datagrid('reload');
 		}else{
 			$.messager.alert('错误提示', json.result);

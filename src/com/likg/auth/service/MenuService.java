@@ -54,7 +54,7 @@ public class MenuService {
 			if(StringUtils.isBlank(parentId)) {
 				Menu.setParentId(null);
 			}
-			String prefix = (StringUtils.isBlank(parentId) ? treeDao.MENU_PREFIX : parentId);
+			String prefix = (StringUtils.isBlank(parentId) ? TreeDao.MENU_PREFIX : parentId);
 			Menu.setId(treeDao.getSequenceNo("auth_menu", prefix));
 			menuMapper.save(Menu);
 			

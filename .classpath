@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/hamcrest-core-1.1.jar"/>
@@ -34,5 +33,6 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-acl-3.2.8.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-config-3.2.8.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-security-taglibs-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>

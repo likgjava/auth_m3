@@ -44,7 +44,7 @@ public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuth
 		
 		try {
 			// 判断验证码是否正确
-			String captcha = request.getParameter("captcha");
+			//String captcha = request.getParameter("captcha");
 //			if (!imageCaptchaService.validateResponseForID(request.getSession().getId(), captcha)) {
 //				request.getRequestDispatcher("/LoginController.do?method=captchaError").forward(request, response);
 //				return null;

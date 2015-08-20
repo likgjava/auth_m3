@@ -1,0 +1,23 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+
+
+/*form table css*/
+.ftable{
+	width: 100%;
+	border-collapse:collapse;
+	margin-bottom: 5px;
+	color: #000000;
+	font-size: 12px;
+	border: 1px solid #000;
+}
+.ftable .flabel{
+	width: 100px;
+	text-align: right;
+}
+.ftable .fcontent{
+	
+}

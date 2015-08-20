@@ -6,8 +6,6 @@ import java.util.Set;
 
 public class Menu {
 
-	private static final long serialVersionUID = 1638300741655156017L;
-
 	/**记录号*/
 	private String id;
 	

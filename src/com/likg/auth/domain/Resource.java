@@ -6,8 +6,6 @@ import java.util.Set;
 
 public class Resource {
 
-	private static final long serialVersionUID = 1L;
-
 	/**记录号*/
 	private String id;
 	

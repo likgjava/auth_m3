@@ -14,7 +14,6 @@
 	</div>
 	<div data-options="region:'center'" style="overflow: hidden;">
 		<iframe id="mainFrame" src="" style="width:100%;height:100%;border:0;">
-		http://www.baidu.com
 		</iframe>
 	</div>
 </body>
