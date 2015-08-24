@@ -10,13 +10,10 @@
 
 <div class="" style="float: left;width: 200px; border: 1px solid #95b8e7;">
 <ul id="menuTree" data-options="method:'get',animate:true">
-	<li>
-		<span>aaaa</span>
-	</li>
 </ul>
 </div>
 
-<div style="float: left; min-width: 500px;">
+<div style="float: left; min-width: 500px;margin-left:5px;">
 <div class="box-positon">
 	<form class="ropt">
 		<input type="button" id="addMenuBut" class="submit" value="新增" /> &nbsp; 

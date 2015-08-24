@@ -1,4 +1,4 @@
-body{
+body,from{
 	margin: 0;
 	padding: 0;
 }
@@ -12,12 +12,17 @@ body{
 	margin-bottom: 5px;
 	color: #000000;
 	font-size: 12px;
-	border: 1px solid #000;
+	border: 1px solid #95b8e7;
+	background-color: #fff;
+}
+.ftable td{
+	border: 1px solid #95b8e7;
 }
 .ftable .flabel{
 	width: 100px;
 	text-align: right;
+	background-color: #dbedf4;
 }
 .ftable .fcontent{
-	
+	background-color: #eff5ff;
 }
