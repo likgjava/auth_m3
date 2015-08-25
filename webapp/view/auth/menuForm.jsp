@@ -20,13 +20,13 @@
 		<tr>
 			<td class="flabel"><span class="pn-frequired">*</span>关联资源:</td>
 			<td class="fcontent">
-				<input type="text" id="tree_node_id" name="resId" value="${menu.resId}" />
-				<input type="text" size="50" id="tree_node_text" name="resUrl" onclick="openFormDialog2();" class="required" value="${menu.resource.resName}">
+				<input type="hidden" id="tree_node_id" name="resId" value="${menu.resource.id}" />
+				<input type="text" id="tree_node_text" readonly="readonly" onclick="openFormDialog2();" class="required" value="${menu.resource.resName}">
 			</td>
 		</tr>
 		<tr>
 			<td class="flabel">资源描述:</td>
-			<td class="fcontent"><textarea maxlength="255" name="menuDesc" rows="4" cols="60">${menu.menuDesc }</textarea></td>
+			<td class="fcontent"><textarea maxlength="255" name="menuDesc" rows="3" cols="30">${menu.menuDesc }</textarea></td>
 		</tr>
 		<tr>
 			<td class="pn-fbutton" colspan="2"><input type="button" onclick="submit22();" class="submit" value="提交" /> &nbsp; <input type="reset" class="reset" value="重置" /></td>

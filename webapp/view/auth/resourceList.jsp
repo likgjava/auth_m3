@@ -10,13 +10,10 @@
 
 <div class="" style="float: left;width: 200px; border: 1px solid #95b8e7;">
 <ul id="menuTree" data-options="method:'get',animate:true">
-	<li>
-		<span>aaaa</span>
-	</li>
 </ul>
 </div>
 
-<div style="float: left; min-width: 500px;">
+<div style="float: left; min-width: 500px;margin-left:5px;">
 <div class="box-positon">
 	<form class="ropt">
 		<input type="button" id="addResourceBut" class="submit" value="新增" /> &nbsp; 
@@ -37,7 +34,7 @@
 <script type="text/javascript">
 $(function(){
 	$('#menuTree').tree({
-		url:'${path}/ResourceController/getResourceTree.do',
+		url:'${path}/ResourceController/getResourceList.do',
 		onClick: function(node){
 			$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: node.id});
 		}

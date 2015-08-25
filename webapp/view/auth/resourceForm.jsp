@@ -5,23 +5,23 @@
 	<input type="hidden" id="resourceObjId" name="id" value="${resource.id }" />
 	<input type="hidden" id="parentResourceObjId" name="parentId" value="${resource.parentId }" />
 	<input type="hidden" name="treeLevel" value="${resource.treeLevel }" />
-	<table cellspacing="1" cellpadding="2" border="0" width="100%" class="pn-ftable" style="font-size:13px;">
+	<table border="1" class="ftable">
 	<tbody>
 		<tr>
-			<td width="12%" class="pn-flabel pn-flabel-h">上级资源:</td>
-			<td width="88%" class="pn-fcontent" colspan="3"><span>${resource.parent.resName }</span></td>
+			<td class="flabel">上级资源:</td>
+			<td class="fcontent"><span>${resource.parent.resName }</span></td>
 		</tr>
 		<tr>
-			<td width="12%" class="pn-flabel pn-flabel-h"><span class="pn-frequired">*</span>资源名称:</td>
-			<td width="88%" class="pn-fcontent" colspan="3"><input type="text" name="resName" maxlength="100" class="required" value="${resource.resName }"></td>
+			<td class="flabel"><span class="pn-frequired">*</span>资源名称:</td>
+			<td class="fcontent"><input type="text" name="resName" maxlength="100" class="required" value="${resource.resName }"></td>
 		</tr>
 		<tr>
-			<td width="12%" class="pn-flabel pn-flabel-h"><span class="pn-frequired">*</span>资源路径:</td>
-			<td width="88%" class="pn-fcontent" colspan="3"><input type="text" size="50" id="resUrl" name="resUrl" maxlength="100" class="required" value="${resource.resUrl }"></td>
+			<td class="flabel"><span class="pn-frequired">*</span>资源路径:</td>
+			<td class="fcontent"><input type="text" size="50" id="resUrl" name="resUrl" maxlength="100" class="required" value="${resource.resUrl }"></td>
 		</tr>
 		<tr>
-			<td width="12%" class="pn-flabel pn-flabel-h">资源描述:</td>
-			<td width="88%" class="pn-fcontent" colspan="3"><textarea maxlength="255" name="resDesc" rows="4" cols="60">${resource.resDesc }</textarea></td>
+			<td class="flabel">资源描述:</td>
+			<td class="fcontent"><textarea maxlength="255" name="resDesc" rows="3" cols="30">${resource.resDesc }</textarea></td>
 		</tr>
 		<tr>
 			<td class="pn-fbutton" colspan="4"><input type="button" onclick="submit22();" class="submit" value="提交" /> &nbsp; <input type="reset" class="reset" value="重置" /></td>

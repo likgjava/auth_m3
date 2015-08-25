@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.likg.auth.domain.Menu;
 import com.likg.auth.domain.Resource;
 import com.likg.auth.service.ResourceService;
 import com.likg.common.Constants;
+import com.likg.common.domain.EasyuiTree;
 
 @Controller
 @RequestMapping("/ResourceController")
@@ -28,28 +30,44 @@ public class ResourceController {
 		return "view/auth/resourceList";
 	}
 	
-	
+	/**
+	 * 加载资源树
+	 * @param id
+	 * @return
+	 * @author likaige
+	 * @create 2015年8月18日 下午5:17:20
+	 */
 	@ResponseBody
-	@RequestMapping("getResourceTree")
-	public List<Map<String, String>> getResourceTree(String id){
-		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+	@RequestMapping("getResourceList")
+	public List<EasyuiTree> getResourceList(String id){
+		List<EasyuiTree> list = new ArrayList<EasyuiTree>();
 		
+		//首次加载
 		if(id == null){
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("id", "0");
-			map.put("text", "资源树");
-			map.put("state", "closed");
-			list.add(map);
-			return list;
-		}
-		
-		List<Resource> menuList = resourceService.getResourceList("0".equals(id) ? null : id);
-		for(Resource r : menuList){
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("id", r.getId()+"");
-			map.put("text", r.getResName());
-			map.put("state", r.getIsLeaf() ? "open" : "closed");
-			list.add(map);
+			EasyuiTree root = new EasyuiTree();
+			root.setId("0");
+			root.setText("资源树");
+			root.setState("open");
+			list.add(root);
+			
+			//获取一级菜单
+			List<Resource> menuList = resourceService.getResourceList(null);
+			for(Resource r : menuList){
+				EasyuiTree node = new EasyuiTree();
+				node.setId(r.getId()+"");
+				node.setText(r.getResName());
+				node.setState(r.getIsLeaf() ? "open" : "closed");
+				root.getChildren().add(node);
+			}
+		}else{
+			List<Resource> menuList = resourceService.getResourceList("0".equals(id) ? null : id);
+			for(Resource r : menuList){
+				EasyuiTree node = new EasyuiTree();
+				node.setId(r.getId()+"");
+				node.setText(r.getResName());
+				node.setState(r.getIsLeaf() ? "open" : "closed");
+				list.add(node);
+			}
 		}
 		return list;
 	}
