@@ -33,7 +33,7 @@ $(function(){
 	$('#menuTree').tree({
 		url:'${path}/ResourceController/getResourceList.do',
 		onClick: function(node){
-			$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: node.id});
+			$('#resourceInfo').load('${path}/ResourceController/toDetailView.do', {id: node.id});
 		}
 	});
 	
@@ -53,7 +53,7 @@ $(function(){
 		//获取节点的层级数
 		//data.resourceLevel = ResourceTree.getLevel(id);
 		
-		$('#resourceInfo').load('${path}/ResourceController/toResourceFormView.do', data);
+		$('#resourceInfo').load('${path}/ResourceController/toFormView.do', data);
 	});
 
 	//修改
@@ -64,7 +64,7 @@ $(function(){
 		}else if(node.id == '0'){
 			alert('该节点不能修改！'); return ;
 		}
-		$('#resourceInfo').load('${path}/ResourceController/toResourceFormView.do', {id: node.id});
+		$('#resourceInfo').load('${path}/ResourceController/toFormView.do', {id: node.id});
 	});
 	
 	//删除
@@ -93,7 +93,7 @@ $(function(){
 						//刷新树节点
 						$('#menuTree').tree('reload', pnode.target);
 						//刷新表单域
-						$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: pnode.id});
+						$('#resourceInfo').load('${path}/ResourceController/toDetailView.do', {id: pnode.id});
 					}else{
 						//刷新树节点
 						//ResourceTree.refreshItem('-1');

@@ -1,12 +1,10 @@
 package com.likg.auth.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -125,16 +123,17 @@ public class UserController {
 	 * @author likaige
 	 * @create 2014年3月13日 下午4:48:41
 	 */
+	@ResponseBody
 	@RequestMapping("/save")
-	public void save(HttpServletResponse response, User user) {
-		String result = "success";
+	public JsonResult save(User user) {
+		JsonResult result = JsonResult.getInstance();
 		try {
 			userService.saveUser(user);
 		} catch (Exception e) {
-			result = e.toString();
+			result = JsonResult.getFailResult(e.toString());
 			log.error("出现异常：", e);
 		}
-		this.renderText(response, result);
+		return result;
 	}
 	
 	/**
@@ -155,24 +154,6 @@ public class UserController {
 			log.error("出现异常：", e);
 		}
 		return result;
-	}
-	
-	/**
-	 * 返回文本信息
-	 * @param text 文本内容
-	 * @author likaige
-	 * @create 2014年3月4日 上午10:10:37
-	 */
-	private void renderText(HttpServletResponse response, String text) {
-		response.setContentType("text/plain;charset=UTF-8");
-		response.setHeader("Pragma", "No-cache");
-		response.setHeader("Cache-Control", "no-cache");
-		response.setDateHeader("Expires", 0);
-		try {
-			response.getWriter().write(text);
-		} catch (IOException e) {
-			log.error("出现异常：", e);
-		}
 	}
 	
 }

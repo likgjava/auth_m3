@@ -82,8 +82,16 @@ public class ResourceController {
 	}
 	
 	
-	@RequestMapping("toResourceFormView")
-	public ModelAndView toResourceFormView(String id, String parentId) {
+	/**
+	 * 跳转到表单页面
+	 * @param id
+	 * @param parentId
+	 * @return
+	 * @author likaige
+	 * @create 2015年8月26日 上午9:58:30
+	 */
+	@RequestMapping("toFormView")
+	public ModelAndView toFormView(String id, String parentId) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		Resource resource = null;
@@ -91,7 +99,6 @@ public class ResourceController {
 		if(id == null) {
 			resource = new Resource();
 			//获取父节点信息，若父节点id为空则增加一级节点
-			//String parentId = request.getParameter("parentId");
 			if(parentId != null) {
 				Resource parentResource = resourceService.get(parentId);
 				resource.setParent(parentResource);
@@ -115,8 +122,8 @@ public class ResourceController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("toResourceDetailView")
-	public ModelAndView toResourceDetailView(String id) throws Exception {
+	@RequestMapping("toDetailView")
+	public ModelAndView toDetailView(String id) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		Resource resource = resourceService.get(id);
@@ -151,22 +158,20 @@ public class ResourceController {
 	 * @param objId 节点id
 	 * @param request
 	 * @return
-	 * @throws Exception
 	 */
 	@ResponseBody
 	@RequestMapping("removeAll")
-	public Map<String, Object> removeAll(String id, HttpServletRequest request) throws Exception {
-		Map<String, Object> model = new HashMap<String, Object>();
-		
-		//删除节点及其所有子孙节点
-		resourceService.removeAll(id);
-		model.put(Constants.SUCCESS, true);
-		
-		return model;
+	public JsonResult removeAll(String id) {
+		JsonResult result = JsonResult.getInstance();
+		try {
+			//删除节点及其所有子孙节点
+			resourceService.removeAll(id);
+		} catch (Exception e) {
+			result = JsonResult.getFailResult(e.toString());
+			log.error(e);
+		}
+		return result;
 	}
-	
-	
-	
 	
 	
 	@RequestMapping("toAllotResourceView")
