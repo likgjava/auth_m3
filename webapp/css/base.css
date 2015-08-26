@@ -3,7 +3,9 @@ body,from{
 	padding: 0;
 }
 
-
+.mbody{
+	margin: 5px;
+}
 
 /*form table css*/
 .ftable{

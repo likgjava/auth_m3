@@ -5,26 +5,23 @@
 <%@ include file="/view/common/head.jsp" %>
 </head>
 <body>
+<div class="mbody">
 
-<div style="margin: 5px;">
-
-<div class="" style="float: left;width: 200px; border: 1px solid #95b8e7;">
-<ul id="menuTree" data-options="method:'get',animate:true">
-</ul>
+<div style="float:left;width:200px; border:1px solid #95b8e7;">
+	<ul id="menuTree" data-options="method:'get',animate:true"></ul>
 </div>
 
 <div style="float: left; min-width: 500px;margin-left:5px;">
-<div class="box-positon">
-	<form class="ropt">
-		<input type="button" id="addResourceBut" class="submit" value="新增" /> &nbsp; 
-		<input type="button" id="updateResourceBut" class="reset" value="修改" /> &nbsp; 
-		<input type="button" id="deleteResourceBut" class="del-button" value="删除" /> &nbsp; 
-	</form>
-	<div class="clear"></div>
-</div>
-
-<div id="resourceInfo" style="">
-</div>
+	<div class="box-positon">
+		<form class="ropt">
+			<input type="button" id="addResourceBut" class="submit" value="新增" /> &nbsp; 
+			<input type="button" id="updateResourceBut" class="reset" value="修改" /> &nbsp; 
+			<input type="button" id="deleteResourceBut" class="del-button" value="删除" /> &nbsp; 
+		</form>
+		<div class="clear"></div>
+	</div>
+	
+	<div id="resourceInfo"></div>
 </div>
 
 </div>

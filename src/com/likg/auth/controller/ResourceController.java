@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.likg.auth.domain.Menu;
 import com.likg.auth.domain.Resource;
 import com.likg.auth.service.ResourceService;
 import com.likg.common.Constants;
@@ -25,6 +24,12 @@ public class ResourceController {
 	@javax.annotation.Resource
 	private ResourceService resourceService;
 	
+	/**
+	 * 跳转到资源管理页面
+	 * @return
+	 * @author likaige
+	 * @create 2015年8月26日 上午9:02:36
+	 */
 	@RequestMapping("/toList")
 	public String toList() {
 		return "view/auth/resourceList";
