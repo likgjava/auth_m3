@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,10 +17,13 @@ import com.likg.auth.domain.Resource;
 import com.likg.auth.service.ResourceService;
 import com.likg.common.Constants;
 import com.likg.common.domain.EasyuiTree;
+import com.likg.common.domain.JsonResult;
 
 @Controller
 @RequestMapping("/ResourceController")
 public class ResourceController {
+	
+	private static Logger log = Logger.getLogger(ResourceController.class);
 	
 	@javax.annotation.Resource
 	private ResourceService resourceService;
@@ -79,7 +83,7 @@ public class ResourceController {
 	
 	
 	@RequestMapping("toResourceFormView")
-	public ModelAndView toResourceFormView(String id, String parentId, HttpServletRequest request) throws Exception {
+	public ModelAndView toResourceFormView(String id, String parentId) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		Resource resource = null;
@@ -112,7 +116,7 @@ public class ResourceController {
 	 * @throws Exception
 	 */
 	@RequestMapping("toResourceDetailView")
-	public ModelAndView toResourceDetailView(String id, HttpServletRequest request) throws Exception {
+	public ModelAndView toResourceDetailView(String id) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		Resource resource = resourceService.get(id);
@@ -121,16 +125,25 @@ public class ResourceController {
 		return new ModelAndView("view/auth/resourceDetail", model);
 	}
 	
+	/**
+	 * 保存资源信息
+	 * @param resource
+	 * @return
+	 * @author likaige
+	 * @create 2015年8月26日 上午9:37:57
+	 */
 	@ResponseBody
 	@RequestMapping("save")
-	public Map<String, Object> save(Resource Resource, HttpServletRequest request) throws Exception {
-		Map<String, Object> model = new HashMap<String, Object>();
-		
-		//保存资源信息
-		resourceService.saveResource(Resource);
-		model.put(Constants.SUCCESS, true);
-		
-		return model;
+	public JsonResult save(Resource resource) {
+		JsonResult result = JsonResult.getInstance();
+		try {
+			//保存资源信息
+			resourceService.saveResource(resource);
+		} catch (Exception e) {
+			result = JsonResult.getFailResult(e.toString());
+			log.error(e);
+		}
+		return result;
 	}
 	
 	/**
