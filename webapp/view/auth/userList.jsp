@@ -5,9 +5,8 @@
 <%@ include file="/view/common/head.jsp" %>
 </head>
 <body>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-<div style="margin: 5px;">
+<div class="mbody">
 <table id="dataList" class="easyui-datagrid" title="用户列表"
 	url='${path}/UserController/getPage.do'
 	data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:10,method:'post',toolbar:'#tb',fitColumns:true">
@@ -40,7 +39,7 @@
 <!-- 详情弹出窗口 -->
 <div id="userDetailDialog" class="easyui-dialog" closed="true" buttons="#userDetailDialog-buttons"></div>
 <div id="userDetailDialog-buttons">
-	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userDetailDialog').dialog('close')">关闭</a>
+	<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userDetailDialog').dialog('close')">关闭</a>
 </div>
 
 <!-- 表单弹出窗口 -->
@@ -50,10 +49,6 @@
 	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userFormDialog').dialog('close')">取消</a>
 </div>
 </div>
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 </body>
 </html>
@@ -122,8 +117,9 @@ function saveUser(){
 			});
 			return true;
 		},
-		success: function(result){
-			if (result == 'success'){
+		success: function(json){
+			json = eval("("+json+")");
+			if (json.success){
 				$.messager.show({
 					title:'操作提示',
 					msg:'添加成功！',
@@ -137,7 +133,7 @@ function saveUser(){
 				$('#userFormDialog').dialog('close');
 				$('#dataList').datagrid('reload');
 			}else{
-				$.messager.alert('错误提示', result);
+				$.messager.alert('错误提示', json.result);
 			}
 		}
 	});

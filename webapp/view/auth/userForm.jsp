@@ -4,14 +4,14 @@
 <div>
 <form id="userForm" method="post">
 <input type="hidden" name="id" value="${user.id }" />
-<table>
+<table class="ftable">
 	<tr>
-		<td width="40%" align="right">用户名：</td>
-		<td><input type="text" name="userName" value="${user.userName }" class="easyui-validatebox" data-options="required:true" /></td>
+		<td class="flabel">用户名：</td>
+		<td class="fcontent"><input type="text" name="userName" value="${user.userName }" class="easyui-validatebox" data-options="required:true" /></td>
 	</tr>
 	<tr>
-		<td align="right">分配角色：</td>
-		<td>
+		<td class="flabel">分配角色：</td>
+		<td class="fcontent">
 			<input id="combo" type="text" />
 			<div id="roleList">
 				<div style="color:#99BBE8;background:#fafafa;padding:5px;">选择角色</div>

@@ -39,7 +39,8 @@
 	</select>
 	
 	<select id="save" parameterType="com.likg.auth.domain.Resource">
-		insert into auth_resource(id,parent_id,res_name,res_url,is_leaf) values(#{id},#{parentId},#{resName},#{resUrl},#{isLeaf})
+		insert into auth_resource(id,parent_id,res_name,res_url,res_desc,is_leaf) 
+		values(#{id},#{parentId},#{resName},#{resUrl},#{resDesc},#{isLeaf})
 	</select>
 	
 	<select id="update" parameterType="com.likg.auth.domain.Resource">

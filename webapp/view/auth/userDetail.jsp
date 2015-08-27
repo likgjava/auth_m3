@@ -7,8 +7,8 @@
 		<td class="fcontent">${user.userName }</td>
 	</tr>
 	<tr>
-		<td align="right">分配角色：</td>
-		<td>
+		<td class="flabel">分配角色：</td>
+		<td class="fcontent">
 			<c:forEach var="allottedRole" items="${user.roleList }" varStatus="status">
 				<c:if test="${status.index > 0}">, </c:if>${allottedRole.roleName }
 			</c:forEach>

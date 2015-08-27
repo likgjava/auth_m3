@@ -52,13 +52,13 @@ function submit22(){
 					var node = $('#menuTree').tree('getSelected');
 					$('#menuTree').tree('update', {target: node.target, text: $('input[name=resName]').val()});
 					//刷新表单域
-					$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: resourceObjId});
+					$('#resourceInfo').load('${path}/ResourceController/toDetailView.do', {id: resourceObjId});
 				}
 				//新增
 				else{
 					//刷新表单域
 					var node = $('#menuTree').tree('getSelected');
-					$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: node.id});
+					$('#resourceInfo').load('${path}/ResourceController/toDetailView.do', {id: node.id});
 					
 					//刷新树节点
 					//ResourceTree.refreshItem(ResourceTree.getSelectedItemId());
