@@ -7,7 +7,15 @@
 <table class="ftable">
 	<tr>
 		<td class="flabel">用户名：</td>
-		<td class="fcontent"><input type="text" name="userName" value="${user.userName }" class="easyui-validatebox" data-options="required:true" /></td>
+		<td class="fcontent">
+			<input type="text" name="userName" value="${user.userName }" class="easyui-validatebox" data-options="required:true" />
+		</td>
+	</tr>
+	<tr>
+		<td class="flabel">真实姓名：</td>
+		<td class="fcontent">
+			<input type="text" name="realName" value="${user.realName }" />
+		</td>
 	</tr>
 	<tr>
 		<td class="flabel">分配角色：</td>

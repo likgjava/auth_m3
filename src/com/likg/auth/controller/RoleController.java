@@ -34,6 +34,7 @@ public class RoleController {
 	
 	@javax.annotation.Resource
 	private RoleService roleService;
+	
 	@javax.annotation.Resource
 	private ResourceService resourceService;
 

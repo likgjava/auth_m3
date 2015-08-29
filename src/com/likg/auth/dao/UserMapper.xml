@@ -21,7 +21,7 @@
 	
 	
 	<insert id="saveUser" parameterType="com.likg.auth.domain.User" useGeneratedKeys="true" keyProperty="id">
-		insert into auth_user(user_name) values(#{userName})
+		insert into auth_user(user_name,real_name,create_time) values(#{userName},#{realName},#{createTime})
 	</insert>
 	
 	<insert id="saveUserRole" parameterType="com.likg.auth.domain.User">
@@ -36,7 +36,7 @@
 	</delete>
 	
 	<update id="updateUser" parameterType="com.likg.auth.domain.User">
-		update auth_user set user_name=#{userName} where id=#{id}
+		update auth_user set user_name=#{userName},real_name=#{realName} where id=#{id}
 	</update>
 	
 	<delete id="deleteUser" parameterType="int">
