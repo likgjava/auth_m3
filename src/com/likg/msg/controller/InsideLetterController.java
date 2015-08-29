@@ -1,4 +1,4 @@
-package com.likg.auth.controller;
+package com.likg.msg.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,22 +14,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.likg.auth.domain.Role;
 import com.likg.auth.domain.User;
-import com.likg.auth.service.RoleService;
 import com.likg.auth.service.UserService;
 import com.likg.common.domain.EasyuiPage;
 import com.likg.common.domain.JsonResult;
+import com.likg.msg.domain.InsideLetter;
+import com.likg.msg.service.InsideLetterService;
 
 @Controller
-@RequestMapping("/UserController")
-public class UserController {
+@RequestMapping("/InsideLetterController")
+public class InsideLetterController {
 	
-	private static Logger log = Logger.getLogger(UserController.class);
+	private static Logger log = Logger.getLogger(InsideLetterController.class);
 	
 	@Resource
 	private UserService userService;
 	
 	@Resource
-	private RoleService roleService;
+	private InsideLetterService insideLetterService;
 
 	/**
 	 * 跳转到列表页面
@@ -39,7 +40,7 @@ public class UserController {
 	 */
 	@RequestMapping("/toList")
 	public String toList() {
-		return "view/auth/userList";
+		return "view/msg/insideLetterList";
 	}
 	
 	/**
@@ -52,9 +53,9 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getPage")
-	public EasyuiPage<User> getPage(User user, EasyuiPage<User> page) {
+	public EasyuiPage<InsideLetter> getPage(InsideLetter insideLetter, EasyuiPage<InsideLetter> page) {
 		try {
-			page = userService.getPage(page, user);
+			page = insideLetterService.getPage(page, insideLetter);
 		} catch (Exception e) {
 			log.error("出现异常：", e);
 		}
@@ -73,16 +74,14 @@ public class UserController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		try {
 			//获取用户信息
-			User user = userService.getUser(id);
+			InsideLetter user = userService.getInsideLetter(id);
 			model.put("user", user);
 			
 			//获取用户已分配的角色
-			List<Role> allottedRoleList = roleService.getRoleListByUser(user.getId());
-			user.setRoleList(allottedRoleList);
 		} catch (Exception e) {
 			log.error("出现异常：", e);
 		}
-		return new ModelAndView("view/auth/userDetail", model);
+		return new ModelAndView("view/auth/InsideLetterDetail", model);
 	}
 	
 	/**
@@ -92,8 +91,8 @@ public class UserController {
 	 * @author likaige
 	 * @create 2014年3月13日 下午5:06:31
 	 */
-	@RequestMapping("/toFormView")
-	public ModelAndView toFormView(Integer id) {
+	@RequestMapping("/toSendInsideLetterView")
+	public ModelAndView toSendInsideLetterView(Integer id) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		try {
 			//获取所有角色列表数据
