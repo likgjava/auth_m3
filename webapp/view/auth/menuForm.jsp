@@ -73,13 +73,13 @@ function submit22(){
 					var node = $('#menuTree').tree('getSelected');
 					$('#menuTree').tree('update', {target: node.target, text: $('input[name=resName]').val()});
 					//刷新表单域
-					$('#menuInfo').load('${path}/MenuController/toMenuDetailView.do', {id: menuObjId});
+					$('#menuInfo').load('${path}/MenuController/toDetailView.do', {id: menuObjId});
 				}
 				//新增
 				else{
 					//刷新表单域
 					var node = $('#menuTree').tree('getSelected');
-					$('#menuInfo').load('${path}/MenuController/toMenuDetailView.do', {id: node.id});
+					$('#menuInfo').load('${path}/MenuController/toDetailView.do', {id: node.id});
 					
 					//刷新树节点
 					$('#menuTree').tree('reload', node.target);

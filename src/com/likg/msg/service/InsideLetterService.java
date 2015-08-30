@@ -8,40 +8,48 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.likg.auth.dao.UserMapper;
 import com.likg.auth.domain.Resource;
 import com.likg.auth.domain.Role;
 import com.likg.auth.domain.User;
 import com.likg.common.domain.EasyuiPage;
 import com.likg.msg.dao.InsideLetterMapper;
 import com.likg.msg.domain.InsideLetter;
+import com.likg.security.AuthenticationHelper;
 
 @Service
 public class InsideLetterService {
 	
 	@javax.annotation.Resource
-	private InsideLetterMapper userMapper;
+	private InsideLetterMapper insideLetterMapper;
 	
-	public EasyuiPage<InsideLetter> getPage(EasyuiPage<InsideLetter> page, InsideLetter insideLetter) throws Exception {
+	public EasyuiPage<InsideLetter> getPage(EasyuiPage<InsideLetter> page, String boxType) throws Exception {
 		
-		Integer totalCount = userMapper.getCount(insideLetter);
-		page.setTotal(totalCount);
-		if(totalCount > 0) {
-			RowBounds rowBounds = new RowBounds(page.getIndex(), page.getPageSize());
-			List<InsideLetter> list = userMapper.getPage(insideLetter, rowBounds);
-			page.setResult(list);
+		int userId = AuthenticationHelper.getCurrentUser().getId();
+		
+		if("inbox".equals(boxType)){
+			Integer totalCount = insideLetterMapper.getInboxCount(userId);
+			page.setTotal(totalCount);
+			if(totalCount > 0) {
+				RowBounds rowBounds = new RowBounds(page.getIndex(), page.getPageSize());
+				List<InsideLetter> list = insideLetterMapper.getInboxPage(userId, rowBounds);
+				page.setResult(list);
+			}
+		}else{
+			
 		}
+		
+		
 		
 		return page;
 	}
 
 	
 	public User getUser(int id) throws Exception {
-		return userMapper.getUser(id);
+		return insideLetterMapper.getUser(id);
 	}
 	
 	public List<User> getUserList() throws Exception {
-		return userMapper.getUserList();
+		return insideLetterMapper.getUserList();
 	}
 
 	@Transactional
@@ -49,29 +57,29 @@ public class InsideLetterService {
 		// 新增
 		if (user.getId() == 0) {
 			//保存用户信息
-			userMapper.saveUser(user);
+			insideLetterMapper.saveUser(user);
 			//保存角色信息
-			userMapper.saveUserRole(user);
+			insideLetterMapper.saveUserRole(user);
 		}
 		// 修改
 		else {
 			//修改用户信息
-			userMapper.updateUser(user);
+			insideLetterMapper.updateUser(user);
 			//删除旧的角色
-			userMapper.deleteUserRole(user.getId());
+			insideLetterMapper.deleteUserRole(user.getId());
 			//保存角色信息
-			userMapper.saveUserRole(user);
+			insideLetterMapper.saveUserRole(user);
 		}		
 	}
 
 	public void delete(int id) throws Exception {
-		userMapper.deleteUser(id);
+		insideLetterMapper.deleteUser(id);
 		
 	}
 
 
 	public User getUserByUserName(String username) {
-		List<Map<String, Object>> list = userMapper.getUserByUserName(username);
+		List<Map<String, Object>> list = insideLetterMapper.getUserByUserName(username);
 		
 		if(list.isEmpty()){
 			return null;

@@ -53,9 +53,9 @@ public class InsideLetterController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getPage")
-	public EasyuiPage<InsideLetter> getPage(InsideLetter insideLetter, EasyuiPage<InsideLetter> page) {
+	public EasyuiPage<InsideLetter> getPage(String boxType, EasyuiPage<InsideLetter> page) {
 		try {
-			page = insideLetterService.getPage(page, insideLetter);
+			page = insideLetterService.getPage(page, boxType);
 		} catch (Exception e) {
 			log.error("出现异常：", e);
 		}
@@ -74,8 +74,8 @@ public class InsideLetterController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		try {
 			//获取用户信息
-			InsideLetter user = userService.getInsideLetter(id);
-			model.put("user", user);
+			//InsideLetter user = userService.getInsideLetter(id);
+			//model.put("user", user);
 			
 			//获取用户已分配的角色
 		} catch (Exception e) {
@@ -95,24 +95,10 @@ public class InsideLetterController {
 	public ModelAndView toSendInsideLetterView(Integer id) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		try {
-			//获取所有角色列表数据
-			List<Role> allRoleList = roleService.getRoleList();
-			model.put("allRoleList", allRoleList);
-			
-			User user = new User();
-			if(id != null) {
-				//获取用户信息
-				user = userService.getUser(id);
-				
-				//获取用户已分配的角色
-				List<Role> allottedRoleList = roleService.getRoleListByUser(user.getId());
-				model.put("allottedRoleList", allottedRoleList);
-			}
-			model.put("user", user);
 		} catch (Exception e) {
 			log.error("出现异常：", e);
 		}
-		return new ModelAndView("view/auth/userForm", model);
+		return new ModelAndView("view/msg/sendInsideLetter", model);
 	}
 	
 	/**

@@ -104,7 +104,7 @@ public class MenuController {
 		return list;
 	}
 	
-	@RequestMapping("toMenuFormView")
+	@RequestMapping("toFormView")
 	public ModelAndView toMenuFormView(String id, String parentId, HttpServletRequest request) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
@@ -137,7 +137,7 @@ public class MenuController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("toMenuDetailView")
+	@RequestMapping("toDetailView")
 	public ModelAndView toMenuDetailView(String id, HttpServletRequest request) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		

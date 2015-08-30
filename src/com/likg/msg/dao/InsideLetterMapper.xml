@@ -43,17 +43,16 @@
 		delete from auth_user where id=#{id}
 	</delete>
 	
-	<select id="getPage" parameterType="com.likg.auth.domain.Role" resultMap="userMap">
+	<select id="getInboxPage" parameterType="int" resultType="com.likg.msg.domain.InsideLetter">
 		select *
-		from inside_letter
-		where 1=1
-			<if test="title!=null and title!=''">and title like CONCAT('%',#{title},'%')</if>
+		from inside_letter t
+		join inside_letter_user u on t.id=u.inside_letter_id
+		where u.user_id=#{userId}
 		order by id desc
 	</select>
-	<select id="getCount" parameterType="com.likg.msg.domain.InsideLetter" resultType="int">
-		select count(id) from inside_letter
-		where 1=1
-			<if test="title!=null and title!=''">and title like CONCAT('%',#{title},'%')</if>
+	<select id="getInboxCount" parameterType="int" resultType="int">
+		select count(id) from inside_letter_user t
+		where t.user_id=#{userId}
 	</select>
 	
 	

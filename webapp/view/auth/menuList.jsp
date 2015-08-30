@@ -4,7 +4,7 @@
 <head>
 <%@ include file="/view/common/head.jsp" %>
 </head>
-<body>
+<body style="min-height: 500px;">
 
 <div style="margin: 5px;">
 
@@ -36,7 +36,7 @@ $(function(){
 	$('#menuTree').tree({
 		url:'${path}/MenuController/getMenuList.do',
 		onClick: function(node){
-			$('#menuInfo').load('${path}/MenuController/toMenuDetailView.do', {id: node.id});
+			$('#menuInfo').load('${path}/MenuController/toDetailView.do', {id: node.id});
 		}
 	});
 	
@@ -55,7 +55,7 @@ $(function(){
 		//获取节点的层级数
 		//data.menuLevel = menuTree.getLevel(id);
 		
-		$('#menuInfo').load('${path}/MenuController/toMenuFormView.do', data);
+		$('#menuInfo').load('${path}/MenuController/toFormView.do', data);
 	});
 
 	//修改
@@ -66,7 +66,7 @@ $(function(){
 		}else if(node.id == '0'){
 			alert('该节点不能修改！'); return ;
 		}
-		$('#menuInfo').load('${path}/MenuController/toMenuFormView.do', {id: node.id});
+		$('#menuInfo').load('${path}/MenuController/toFormView.do', {id: node.id});
 	});
 	
 	//删除
@@ -95,7 +95,7 @@ $(function(){
 						//刷新树节点
 						$('#menuTree').tree('reload', pnode.target);
 						//刷新表单域
-						$('#menuInfo').load('${path}/MenuController/toMenuDetailView.do', {id: pnode.id});
+						$('#menuInfo').load('${path}/MenuController/toDetailView.do', {id: pnode.id});
 					}else{
 						//刷新树节点
 						//menuTree.refreshItem('-1');
@@ -130,77 +130,4 @@ function searchData(){
 	});
 }
 
-//打开详情窗口
-function openDetailDialog(id){
-	var url = '${path}/UserController/toUserDetail.do?id='+id;
-	$("#userDetailDialog").dialog({
-		title: '用户详情',
-		href: url,
-		width: 400,
-		height: 200,
-		closed: false,
-		cache: false,
-		modal: true
-	});
-}
-
-//打开表单窗口
-function openFormDialog(id){
-	var url = '${path}/UserController/toUserForm.do'+(id!=null ? '?id='+id : '');
-	$("#userFormDialog").dialog({
-		title: '用户维护',
-		href: url,
-		width: 400,
-		height: 200,
-		closed: false,
-		cache: false,
-		modal: true
-	});
-}
-
-//保存
-function saveUser(){
-	$('#userForm').form('submit',{
-		url: '${path}/UserController/save.do',
-		dataType: 'json',
-		onSubmit: function(param){
-			if(!$(this).form('validate')){
-				return false;
-			}
-			$('#roleList input:checked').each(function(i,dom){
-				param['roleList['+i+'].id'] = $(dom).val();
-			});
-			return true;
-		},
-		success: function(result){
-			if (result == 'success'){
-				$.messager.show({
-					title:'操作提示',
-					msg:'添加成功！',
-					showType:'slide',
-					style:{
-						right:'',
-						top:document.body.scrollTop+document.documentElement.scrollTop,
-						bottom:''
-					}
-				});
-				$('#userFormDialog').dialog('close');
-				$('#dataList').datagrid('reload');
-			}else{
-				$.messager.alert('错误提示', result);
-			}
-		}
-	});
-}
-
-//删除
-function deleteUser(id){
-	$.get('${path}/UserController/delete.do',{id:id},function(json){
-		if (json.result == 'success'){
-			$('#dataList').datagrid('reload');
-		}else{
-			$.messager.alert('错误提示', json.result);
-		}
-	});
-}
 </script>

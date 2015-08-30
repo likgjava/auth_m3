@@ -61,7 +61,7 @@
 	
 	<!-- 扫描映射文件 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.likg.auth.dao" />
+		<property name="basePackage" value="com.likg.*.dao" />
 	</bean>
 	
 </beans>

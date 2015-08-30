@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local_db
-Source Server Version : 50018
+Source Server Version : 50022
 Source Host           : localhost:3306
 Source Database       : mmb
 
 Target Server Type    : MYSQL
-Target Server Version : 50018
+Target Server Version : 50022
 File Encoding         : 65001
 
-Date: 2015-08-18 18:31:06
+Date: 2015-08-30 10:55:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,8 +40,7 @@ INSERT INTO `auth_menu` VALUES ('M01', null, 'R03', '资源列表', null, null, 
 INSERT INTO `auth_menu` VALUES ('M02', null, 'R02', '角色列表', null, null, '1', null, null, null);
 INSERT INTO `auth_menu` VALUES ('M03', null, 'R01', '用户管理', null, null, '1', null, null, null);
 INSERT INTO `auth_menu` VALUES ('M04', null, 'R04', '菜单管理', null, null, '1', null, null, null);
-INSERT INTO `auth_menu` VALUES ('M05', null, 'R02', '111', '', null, '0', null, null, null);
-INSERT INTO `auth_menu` VALUES ('M0501', 'M05', 'R06', '222', '', null, '1', null, null, null);
+INSERT INTO `auth_menu` VALUES ('M05', null, 'R08', '站内信', '', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for auth_resource
@@ -67,10 +66,9 @@ INSERT INTO `auth_resource` VALUES ('R01', null, '用户管理', '/UserControlle
 INSERT INTO `auth_resource` VALUES ('R02', null, '角色列表', '/RoleController/toList.do', null, null, '1', null, null);
 INSERT INTO `auth_resource` VALUES ('R03', null, '资源列表', '/ResourceController/toList.do', null, null, '1', null, null);
 INSERT INTO `auth_resource` VALUES ('R04', null, '菜单管理', '/MenuController/toList.do', null, null, '1', null, null);
-INSERT INTO `auth_resource` VALUES ('R05', null, '发送', '1', null, null, '1', null, null);
-INSERT INTO `auth_resource` VALUES ('R06', null, '2', '2', null, null, '1', null, null);
 INSERT INTO `auth_resource` VALUES ('R07', null, '非菜单资源', '1', null, null, '0', null, null);
 INSERT INTO `auth_resource` VALUES ('R0701', 'R07', '管理中心桌面', '/index.jsp', null, null, '1', null, null);
+INSERT INTO `auth_resource` VALUES ('R08', null, '站内信', '/InsideLetterController/toList.do', '', null, '1', null, null);
 
 -- ----------------------------
 -- Table structure for auth_role
@@ -112,12 +110,18 @@ CREATE TABLE `auth_role_resource` (
 -- ----------------------------
 -- Records of auth_role_resource
 -- ----------------------------
+INSERT INTO `auth_role_resource` VALUES ('1', '0');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R01');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R02');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R03');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R04');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R07');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R0701');
+INSERT INTO `auth_role_resource` VALUES ('1', 'R08');
+INSERT INTO `auth_role_resource` VALUES ('8', 'R01');
+INSERT INTO `auth_role_resource` VALUES ('8', 'R02');
+INSERT INTO `auth_role_resource` VALUES ('8', 'R03');
+INSERT INTO `auth_role_resource` VALUES ('8', 'R04');
 INSERT INTO `auth_role_resource` VALUES ('10', 'R0102');
 INSERT INTO `auth_role_resource` VALUES ('10', 'R0103');
 INSERT INTO `auth_role_resource` VALUES ('11', 'R0103');
@@ -144,6 +148,8 @@ CREATE TABLE `auth_user` (
 INSERT INTO `auth_user` VALUES ('1', 'admin', '1', null, null, null);
 INSERT INTO `auth_user` VALUES ('2', 'test', '1', null, null, null);
 INSERT INTO `auth_user` VALUES ('3', 'java', '1', null, null, null);
+INSERT INTO `auth_user` VALUES ('4', '111', null, null, null, null);
+INSERT INTO `auth_user` VALUES ('5', '3424', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for auth_user_role
@@ -160,4 +166,48 @@ CREATE TABLE `auth_user_role` (
 -- ----------------------------
 INSERT INTO `auth_user_role` VALUES ('1', '1');
 INSERT INTO `auth_user_role` VALUES ('2', '1');
+INSERT INTO `auth_user_role` VALUES ('2', '5');
+INSERT INTO `auth_user_role` VALUES ('2', '8');
+INSERT INTO `auth_user_role` VALUES ('2', '9');
+INSERT INTO `auth_user_role` VALUES ('3', '3');
+INSERT INTO `auth_user_role` VALUES ('3', '4');
 INSERT INTO `auth_user_role` VALUES ('3', '5');
+INSERT INTO `auth_user_role` VALUES ('3', '11');
+INSERT INTO `auth_user_role` VALUES ('4', '7');
+INSERT INTO `auth_user_role` VALUES ('4', '8');
+INSERT INTO `auth_user_role` VALUES ('4', '9');
+INSERT INTO `auth_user_role` VALUES ('5', '9');
+INSERT INTO `auth_user_role` VALUES ('5', '10');
+
+-- ----------------------------
+-- Table structure for inside_letter
+-- ----------------------------
+DROP TABLE IF EXISTS `inside_letter`;
+CREATE TABLE `inside_letter` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) default NULL,
+  `content` varchar(500) default NULL,
+  `create_username` varchar(20) default NULL,
+  `create_time` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='站内信';
+
+-- ----------------------------
+-- Records of inside_letter
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for inside_letter_user
+-- ----------------------------
+DROP TABLE IF EXISTS `inside_letter_user`;
+CREATE TABLE `inside_letter_user` (
+  `id` int(11) NOT NULL,
+  `inside_letter_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  `is_read` int(1) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of inside_letter_user
+-- ----------------------------

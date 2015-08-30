@@ -31,9 +31,9 @@ public interface InsideLetterMapper {
 	public void deleteUser(int id);
 
 	//@DataSource(DynamicDataSource.SLAVE)
-	public List<User> getPage(User user, RowBounds rowBounds);
+	public List<InsideLetter> getInboxPage(int userId, RowBounds rowBounds);
 
-	public Integer getCount(InsideLetter insideLetter);
+	public Integer getInboxCount(int userId);
 	
 
 	public void deleteUserRole(int id);

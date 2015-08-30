@@ -15,7 +15,7 @@
 <script type="text/javascript">
 $(function(){
 	$('#menuTree2').tree({
-		url:'${path}/ResourceController/getResourceTree.do',
+		url:'${path}/ResourceController/getResourceList.do',
 		onClick: function(node){
 			//$('#resourceInfo').load('${path}/ResourceController/toResourceDetailView.do', {id: node.id});
 		}
