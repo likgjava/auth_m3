@@ -10,12 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/**
- * 用户对象
- * 添加Spring Security功能，需要实现UserDetails接口
- * @author likaige
- * @create 2015年8月13日 上午9:35:30
- */
 public class InsideLetter {
 
 	/**
@@ -31,7 +25,6 @@ public class InsideLetter {
 	/**
 	 * 密码
 	 */
-	@JsonIgnore
 	private String content;
 	
 	/**
@@ -49,5 +42,7 @@ public class InsideLetter {
 	 */
 	//private List<Role> roleList = new ArrayList<Role>();
 	
+	//收件人列表
+	private List<Integer> recipientList = new ArrayList<Integer>();
 
 }

@@ -16,21 +16,23 @@
 		<tr>
 			<td class="flabel"><span class="pn-frequired">*</span>标题:</td>
 			<td class="fcontent">
-				<input type="text" name="menuName" maxlength="100" class="required" value="${menu.menuName }">
+				<input type="text" name="title" maxlength="100" class="required" value="${menu.menuName }">
 			</td>
 		</tr>
 		<tr>
 			<td class="flabel"><span class="pn-frequired">*</span>收件人:</td>
 			<td class="fcontent">
-				<input type="text" name="menuName" maxlength="100" class="required" value="${menu.menuName }">
+				<input type="text" name="recipient" maxlength="100" class="required" value="${menu.menuName }">
 			</td>
 		</tr>
 		<tr>
 			<td class="flabel">内容:</td>
-			<td class="fcontent"><textarea maxlength="255" name="menuDesc" rows="3" cols="30">${menu.menuDesc }</textarea></td>
+			<td class="fcontent"><textarea maxlength="255" name="content" rows="3" cols="30">${menu.menuDesc }</textarea></td>
 		</tr>
 		<tr>
-			<td class="pn-fbutton" colspan="2"><input type="button" onclick="submit22();" class="submit" value="提交" /> &nbsp; <input type="reset" class="reset" value="重置" /></td>
+			<td class="pn-fbutton" colspan="2">
+				<input type="button" onclick="submit22();" class="submit" value="提交" />
+			</td>
 		</tr>
 	</tbody>
 	</table>

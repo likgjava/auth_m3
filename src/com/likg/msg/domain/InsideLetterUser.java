@@ -31,7 +31,6 @@ public class InsideLetterUser {
 	/**
 	 * 密码
 	 */
-	@JsonIgnore
 	private int userId;
 	
 	/**
