@@ -1,7 +1,6 @@
 package com.likg.msg.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.likg.auth.domain.Role;
 import com.likg.auth.domain.User;
 import com.likg.auth.service.UserService;
 import com.likg.common.domain.EasyuiPage;
 import com.likg.common.domain.JsonResult;
 import com.likg.msg.domain.InsideLetter;
+import com.likg.msg.domain.InsideLetterUser;
 import com.likg.msg.service.InsideLetterService;
+import com.likg.security.AuthenticationHelper;
 
 @Controller
 @RequestMapping("/InsideLetterController")
@@ -110,10 +110,19 @@ public class InsideLetterController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public JsonResult save(User user) {
+	public JsonResult save(InsideLetter insideLetter) {
 		JsonResult result = JsonResult.getInstance();
 		try {
-			userService.saveUser(user);
+			User user = userService.getUser(insideLetter.getRecipient());
+			InsideLetterUser rec = new InsideLetterUser();
+			rec.setUserId(user.getId());
+			insideLetter.getRecipientList().add(rec);
+			
+			User user2 = AuthenticationHelper.getCurrentUser();
+			insideLetter.setCreateUsername(user2.getUsername());
+			insideLetter.setSendUserId(user2.getId());
+			
+			insideLetterService.saveUser(insideLetter);
 		} catch (Exception e) {
 			result = JsonResult.getFailResult(e.toString());
 			log.error("出现异常：", e);

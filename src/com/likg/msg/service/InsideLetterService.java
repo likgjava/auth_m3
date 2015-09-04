@@ -1,5 +1,6 @@
 package com.likg.msg.service;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.likg.auth.domain.User;
 import com.likg.common.domain.EasyuiPage;
 import com.likg.msg.dao.InsideLetterMapper;
 import com.likg.msg.domain.InsideLetter;
+import com.likg.msg.domain.InsideLetterUser;
 import com.likg.security.AuthenticationHelper;
 
 @Service
@@ -35,7 +37,13 @@ public class InsideLetterService {
 				page.setResult(list);
 			}
 		}else{
-			
+			Integer totalCount = insideLetterMapper.getOutboxCount(userId);
+			page.setTotal(totalCount);
+			if(totalCount > 0) {
+				RowBounds rowBounds = new RowBounds(page.getIndex(), page.getPageSize());
+				List<InsideLetter> list = insideLetterMapper.getOutboxPage(userId, rowBounds);
+				page.setResult(list);
+			}
 		}
 		
 		
@@ -53,23 +61,15 @@ public class InsideLetterService {
 	}
 
 	@Transactional
-	public void saveUser(User user) throws Exception {
-		// 新增
-		if (user.getId() == 0) {
-			//保存用户信息
-			insideLetterMapper.saveUser(user);
-			//保存角色信息
-			insideLetterMapper.saveUserRole(user);
+	public void saveUser(InsideLetter insideLetter) throws Exception {
+		insideLetter.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		
+		insideLetterMapper.saveUser(insideLetter);
+		//保存角色信息
+		for(InsideLetterUser u : insideLetter.getRecipientList()){
+			u.setInsideLetterId(insideLetter.getId());
 		}
-		// 修改
-		else {
-			//修改用户信息
-			insideLetterMapper.updateUser(user);
-			//删除旧的角色
-			insideLetterMapper.deleteUserRole(user.getId());
-			//保存角色信息
-			insideLetterMapper.saveUserRole(user);
-		}		
+		insideLetterMapper.saveUserRole(insideLetter.getRecipientList());
 	}
 
 	public void delete(int id) throws Exception {

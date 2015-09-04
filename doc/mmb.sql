@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50022
 File Encoding         : 65001
 
-Date: 2015-08-30 10:55:09
+Date: 2015-09-04 22:20:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -118,6 +118,14 @@ INSERT INTO `auth_role_resource` VALUES ('1', 'R04');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R07');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R0701');
 INSERT INTO `auth_role_resource` VALUES ('1', 'R08');
+INSERT INTO `auth_role_resource` VALUES ('3', '0');
+INSERT INTO `auth_role_resource` VALUES ('3', 'R01');
+INSERT INTO `auth_role_resource` VALUES ('3', 'R02');
+INSERT INTO `auth_role_resource` VALUES ('3', 'R03');
+INSERT INTO `auth_role_resource` VALUES ('3', 'R04');
+INSERT INTO `auth_role_resource` VALUES ('3', 'R07');
+INSERT INTO `auth_role_resource` VALUES ('3', 'R0701');
+INSERT INTO `auth_role_resource` VALUES ('3', 'R08');
 INSERT INTO `auth_role_resource` VALUES ('8', 'R01');
 INSERT INTO `auth_role_resource` VALUES ('8', 'R02');
 INSERT INTO `auth_role_resource` VALUES ('8', 'R03');
@@ -184,10 +192,10 @@ INSERT INTO `auth_user_role` VALUES ('5', '10');
 -- ----------------------------
 DROP TABLE IF EXISTS `inside_letter`;
 CREATE TABLE `inside_letter` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `title` varchar(100) default NULL,
   `content` varchar(500) default NULL,
-  `create_username` varchar(20) default NULL,
+  `send_user_id` int(11) default NULL,
   `create_time` datetime default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='站内信';
@@ -195,13 +203,16 @@ CREATE TABLE `inside_letter` (
 -- ----------------------------
 -- Records of inside_letter
 -- ----------------------------
+INSERT INTO `inside_letter` VALUES ('6', 'java nihao', 'java hllow a ', '1', '2015-09-04 21:50:15');
+INSERT INTO `inside_letter` VALUES ('7', 'javascript', 'java fafjasdjfasfj;fds', '1', '2015-09-04 21:50:54');
+INSERT INTO `inside_letter` VALUES ('8', 'admin', 'aaaaaaaaaaaaaaaaaa', '3', '2015-09-04 22:19:28');
 
 -- ----------------------------
 -- Table structure for inside_letter_user
 -- ----------------------------
 DROP TABLE IF EXISTS `inside_letter_user`;
 CREATE TABLE `inside_letter_user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `inside_letter_id` int(11) default NULL,
   `user_id` int(11) default NULL,
   `is_read` int(1) default NULL,
@@ -211,3 +222,6 @@ CREATE TABLE `inside_letter_user` (
 -- ----------------------------
 -- Records of inside_letter_user
 -- ----------------------------
+INSERT INTO `inside_letter_user` VALUES ('3', '6', '3', '0');
+INSERT INTO `inside_letter_user` VALUES ('4', '7', '3', '0');
+INSERT INTO `inside_letter_user` VALUES ('5', '8', '1', '0');

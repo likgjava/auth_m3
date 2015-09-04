@@ -7,8 +7,10 @@
 	</div>
 	
 	<div style="float: right; margin-right: 20px;border: 0px solid #f00;line-height: 35px;padding-top: 15px;">
+		${currentUser }111
+		<c:out value="${currentUser.id }" />
 		<a href="javascript:;" onclick="openNewWindow()">新窗口打开</a>
-		<a href="${path}//LoginController/logout.do">退出</a>
+		<a href="${path}/LoginController/logout.do">退出</a>
 	</div>
 </div>
 <script>

@@ -11,6 +11,7 @@ import com.likg.auth.domain.User;
 import com.likg.framework.DynamicDataSource;
 import com.likg.framework.annotation.DataSource;
 import com.likg.msg.domain.InsideLetter;
+import com.likg.msg.domain.InsideLetterUser;
 
 @Repository
 public interface InsideLetterMapper {
@@ -23,8 +24,8 @@ public interface InsideLetterMapper {
 
 	public List<User> getUserList();
 	
-	public void saveUser(User user);
-	public void saveUserRole(User user);
+	public void saveUser(InsideLetter insideLetter);
+	public void saveUserRole(List<InsideLetterUser> list);
 	
 	public void updateUser(User user);
 
@@ -34,6 +35,10 @@ public interface InsideLetterMapper {
 	public List<InsideLetter> getInboxPage(int userId, RowBounds rowBounds);
 
 	public Integer getInboxCount(int userId);
+	
+	public List<InsideLetter> getOutboxPage(int userId, RowBounds rowBounds);
+
+	public Integer getOutboxCount(int userId);
 	
 
 	public void deleteUserRole(int id);

@@ -11,9 +11,6 @@
 		<result property="createTime" column="create_time" />
 	</resultMap>
 
-	<select id="getUser" parameterType="int" resultMap="userMap">
-		select id,user_name from auth_user where id = #{id}
-	</select>
 	
 	<select id="selectList" resultMap="userMap">
 		select id,user_name userName from auth_user order by id desc

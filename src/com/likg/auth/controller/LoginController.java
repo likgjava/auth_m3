@@ -79,7 +79,7 @@ public class LoginController {
 		model.put(Constants.SUCCESS, true);
 		
 		//把当前用户的信息放到session中
-		request.getSession().setAttribute("user", user);
+		request.getSession().setAttribute("currentUser", user);
 		
 		return model;
 	}

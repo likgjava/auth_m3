@@ -16,9 +16,12 @@ public interface UserMapper {
 	
 	@Select("SELECT * FROM auth_user WHERE id=#{id}")
 	User get(int id);
+	
+	@Select("SELECT * FROM auth_user WHERE user_name=#{username}")
+	User getUser(String username);
 
 	
-	public User getUser(int id);
+	//public User getUser(int id);
 
 	public List<User> getUserList();
 	
@@ -41,5 +44,8 @@ public interface UserMapper {
 	public Integer getMaxGoodsId();
 
 	public List<Map<String, Object>> getUserByUserName(String username);
+
+
+	
 	
 }

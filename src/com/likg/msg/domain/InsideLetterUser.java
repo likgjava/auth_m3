@@ -37,7 +37,38 @@ public class InsideLetterUser {
 	 * 真实姓名
 	 */
 	private boolean isRead;
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getInsideLetterId() {
+		return insideLetterId;
+	}
+
+	public void setInsideLetterId(int insideLetterId) {
+		this.insideLetterId = insideLetterId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public boolean isRead() {
+		return isRead;
+	}
+
+	public void setRead(boolean isRead) {
+		this.isRead = isRead;
+	}
 	
 
 }

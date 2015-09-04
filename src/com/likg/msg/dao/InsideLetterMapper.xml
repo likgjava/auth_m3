@@ -20,14 +20,14 @@
 	</select>
 	
 	
-	<insert id="saveUser" parameterType="com.likg.auth.domain.User" useGeneratedKeys="true" keyProperty="id">
-		insert into auth_user(user_name,real_name,create_time) values(#{userName},#{realName},#{createTime})
+	<insert id="saveUser" parameterType="com.likg.msg.domain.InsideLetter" useGeneratedKeys="true" keyProperty="id">
+		insert into inside_letter(title,content,send_user_id,create_time) values(#{title},#{content},#{sendUserId},#{createTime})
 	</insert>
 	
-	<insert id="saveUserRole" parameterType="com.likg.auth.domain.User">
-		insert into auth_user_role(user_id,role_id) values
-		<foreach collection="roleList" item="role" separator=",">
-			(#{id},#{role.id})
+	<insert id="saveUserRole" parameterType="com.likg.msg.domain.InsideLetterUser">
+		insert into inside_letter_user(inside_letter_id,user_id,is_read) values
+		<foreach collection="list" item="role" separator=",">
+			(#{role.insideLetterId},#{role.userId},#{role.isRead})
 		</foreach>
 	</insert>
 	
@@ -44,7 +44,7 @@
 	</delete>
 	
 	<select id="getInboxPage" parameterType="int" resultType="com.likg.msg.domain.InsideLetter">
-		select *
+		select t.*
 		from inside_letter t
 		join inside_letter_user u on t.id=u.inside_letter_id
 		where u.user_id=#{userId}
@@ -53,6 +53,18 @@
 	<select id="getInboxCount" parameterType="int" resultType="int">
 		select count(id) from inside_letter_user t
 		where t.user_id=#{userId}
+	</select>
+	
+	<select id="getOutboxPage" parameterType="int" resultType="com.likg.msg.domain.InsideLetter">
+		select t.*
+		from inside_letter t
+		join inside_letter_user u on t.id=u.inside_letter_id
+		where t.send_user_id=#{userId}
+		order by t.id desc
+	</select>
+	<select id="getOutboxCount" parameterType="int" resultType="int">
+		select count(id) from inside_letter t
+		where t.send_user_id=#{userId}
 	</select>
 	
 	

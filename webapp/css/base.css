@@ -20,6 +20,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
 }
 .ftable td{
 	border: 1px solid #95b8e7;
+	padding: 3px;
 }
 .ftable .flabel{
 	width: 100px;

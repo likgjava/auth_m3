@@ -42,7 +42,11 @@ public class UserService {
 
 	
 	public User getUser(int id) throws Exception {
-		return userMapper.getUser(id);
+		return userMapper.get(id);
+	}
+	
+	public User getUser(String username) {
+		return userMapper.getUser(username);
 	}
 	
 	public List<User> getUserList() throws Exception {
@@ -114,6 +118,9 @@ public class UserService {
 		user.getRoleList().addAll(roleMap.values());
 		return user;
 	}
+
+
+	
 
 	
 

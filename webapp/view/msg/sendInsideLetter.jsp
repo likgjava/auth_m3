@@ -7,10 +7,7 @@
 <body>
 
 <div class="mbody">
-<form id="menuForm" action="${path}/MenuController/save.do" method="post">
-	<input type="hidden" id="menuObjId" name="id" value="${menu.id }" />
-	<input type="hidden" id="parentMenuObjId" name="parentId" value="${menu.parentId }" />
-	<input type="hidden" name="treeLevel" value="${menu.treeLevel }" />
+<form id="menuForm" action="${path}/InsideLetterController/save.do" method="post">
 	<table border="1" class="ftable">
 	<tbody>
 		<tr>
@@ -31,7 +28,7 @@
 		</tr>
 		<tr>
 			<td class="pn-fbutton" colspan="2">
-				<input type="button" onclick="submit22();" class="submit" value="提交" />
+				<input type="submit" class="submit" value="提交" />
 			</td>
 		</tr>
 	</tbody>
@@ -45,25 +42,17 @@
 <script type="text/javascript">
 $(function(){
 	
-	$('#loginForm').submit(function(){
+	$('#menuForm').submit(function(){
 		var userName = $('#userName').val();
 		var password = $('#password').val();
-		if($.trim(userName) == ''){
-			$('#tip').show().html('请输入用户名');
-			return false;
-		}
-		if($.trim(password) == ''){
-			$('#tip').show().html('请输入密码');
-			return false;
-		}
 		
 		$(this).ajaxSubmit({
 			success: function(json) {
 				if (json.success){
-					window.location.href = '${path}/index.jsp';
+					window.location.href = '${path}/InsideLetterController/toList.do';
 				}else{
-					//$.messager.alert('错误提示', json.result);
-					$('#tip').show().html(json.result);
+					$.messager.alert('错误提示', json.result);
+					//$('#tip').show().html(json.result);
 				}
 			}
 		});

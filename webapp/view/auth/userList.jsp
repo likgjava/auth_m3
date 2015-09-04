@@ -77,7 +77,7 @@ function searchData(){
 
 //打开详情窗口
 function openDetailDialog(id){
-	var url = '${path}/UserController/toUserDetail.do?id='+id;
+	var url = '${path}/UserController/toDetailView.do?id='+id;
 	$("#userDetailDialog").dialog({
 		title: '用户详情',
 		href: url,
@@ -91,7 +91,7 @@ function openDetailDialog(id){
 
 //打开表单窗口
 function openFormDialog(id){
-	var url = '${path}/UserController/toUserForm.do'+(id!=null ? '?id='+id : '');
+	var url = '${path}/UserController/toFormView.do'+(id!=null ? '?id='+id : '');
 	$("#userFormDialog").dialog({
 		title: '用户维护',
 		href: url,
