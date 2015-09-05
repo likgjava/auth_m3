@@ -34,8 +34,8 @@ public class UserService {
 			page.setResult(userList);
 		}
 		
-		Integer maxId = userMapper.getMaxGoodsId();
-		System.out.println("maxId==="+maxId);
+		//Integer maxId = userMapper.getMaxGoodsId();
+		//System.out.println("maxId==="+maxId);
 		
 		return page;
 	}

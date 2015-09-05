@@ -64,7 +64,9 @@ function addOper(val,row){
 	var operHtml = '';
 	operHtml += '<a class="oper" href="javascript:;" onclick="openDetailDialog('+row.id+')">查看</a>&nbsp;';
 	operHtml += '<a class="oper" href="javascript:;" onclick="openFormDialog('+row.id+')">修改</a>&nbsp;';
-	operHtml += '<a class="oper" href="javascript:;" onclick="deleteUser('+row.id+')">删除</a>&nbsp;';
+	if(row.username != 'admin'){
+		operHtml += '<a class="oper" href="javascript:;" onclick="deleteUser('+row.id+')">删除</a>&nbsp;';
+	}
 	return operHtml;
 }
 

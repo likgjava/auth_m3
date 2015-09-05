@@ -9,6 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.likg.framework.MyDateSerializer;
 
 /**
  * 用户对象
@@ -49,6 +51,7 @@ public class User implements UserDetails {
 	/**
 	 * 创建时间
 	 */
+	@JsonSerialize(using=MyDateSerializer.class)
 	private Timestamp createTime;
 	
 	/**

@@ -8,7 +8,7 @@
 	<tr>
 		<td class="flabel">用户名：</td>
 		<td class="fcontent">
-			<input type="text" name="userName" value="${user.userName }" class="easyui-validatebox" data-options="required:true" />
+			<input name="userName" value="${user.userName }" ${user.userName=='admin' ? 'readonly' : ''} class="easyui-validatebox" data-options="required:true" />
 		</td>
 	</tr>
 	<tr>
