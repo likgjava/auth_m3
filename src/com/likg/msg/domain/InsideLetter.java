@@ -30,9 +30,11 @@ public class InsideLetter {
 	/**
 	 * 真实姓名
 	 */
-	private String createUsername;
+	
 	
 	private int sendUserId;
+	
+	private String sendUserName;
 	
 	/**
 	 * 创建时间
@@ -56,6 +58,14 @@ public class InsideLetter {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getSendUserName() {
+		return sendUserName;
+	}
+
+	public void setSendUserName(String sendUserName) {
+		this.sendUserName = sendUserName;
 	}
 
 	public int getSendUserId() {
@@ -82,13 +92,6 @@ public class InsideLetter {
 		this.content = content;
 	}
 
-	public String getCreateUsername() {
-		return createUsername;
-	}
-
-	public void setCreateUsername(String createUsername) {
-		this.createUsername = createUsername;
-	}
 
 	public Timestamp getCreateTime() {
 		return createTime;

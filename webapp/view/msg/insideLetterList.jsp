@@ -17,7 +17,7 @@
 			<tr>
 				<th data-options="field:'title',width:80">标题</th>
 				<th data-options="field:'content',width:80">内容</th>
-				<th data-options="field:'createUsername',width:80">发件人</th>
+				<th data-options="field:'sendUserName',width:80">发件人</th>
 				<th data-options="field:'createTime',width:80">创建时间</th>
 				<th data-options="field:'oper', formatter:addOper">操作</th>
 			</tr>

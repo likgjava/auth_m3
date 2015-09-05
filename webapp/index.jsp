@@ -1,5 +1,11 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/view/common/taglibs.jsp" %>
+<%@ page import="com.likg.auth.domain.User,com.likg.security.*" %>
+<%
+User user = AuthenticationHelper.getCurrentUser();
+session.setAttribute("currentUser", user);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -16,8 +16,10 @@ import com.likg.auth.domain.Role;
 import com.likg.auth.domain.User;
 import com.likg.auth.service.RoleService;
 import com.likg.auth.service.UserService;
+import com.likg.common.Constants;
 import com.likg.common.domain.EasyuiPage;
 import com.likg.common.domain.JsonResult;
+import com.likg.security.AuthenticationHelper;
 
 @Controller
 @RequestMapping("/UserController")
@@ -39,6 +41,11 @@ public class UserController {
 	 */
 	@RequestMapping("/toList")
 	public String toList() {
+		
+		User user = AuthenticationHelper.getCurrentUser();
+		
+	System.out.println(user.getUsername());
+	
 		return "view/auth/userList";
 	}
 	

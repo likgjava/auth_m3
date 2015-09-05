@@ -44,9 +44,10 @@
 	</delete>
 	
 	<select id="getInboxPage" parameterType="int" resultType="com.likg.msg.domain.InsideLetter">
-		select t.*
+		select t.*,au.user_name sendUserName
 		from inside_letter t
 		join inside_letter_user u on t.id=u.inside_letter_id
+		join auth_user au on au.id=t.send_user_id
 		where u.user_id=#{userId}
 		order by id desc
 	</select>

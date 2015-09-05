@@ -78,6 +78,10 @@ public class LoginController {
 		User user = AuthenticationHelper.getCurrentUser();
 		model.put(Constants.SUCCESS, true);
 		
+		Object o = request.getParameterNames();
+		
+	System.out.println(user == null);
+		
 		//把当前用户的信息放到session中
 		request.getSession().setAttribute("currentUser", user);
 		
