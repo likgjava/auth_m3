@@ -3,6 +3,11 @@
 <html>
 <head>
 <%@ include file="/view/common/head.jsp" %>
+<style type="text/css">
+.unread{
+	font-weight: bold;
+}
+</style>
 </head>
 <body>
 
@@ -15,7 +20,7 @@
 		data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:10,method:'post',toolbar:'#tb',fitColumns:true">
 		<thead>
 			<tr>
-				<th data-options="field:'title',width:80">标题</th>
+				<th data-options="field:'title',width:80, formatter:forTitle">标题</th>
 				<th data-options="field:'content',width:80">内容</th>
 				<th data-options="field:'sendUserName',width:80">发件人</th>
 				<th data-options="field:'createTime',width:80">创建时间</th>
@@ -49,17 +54,8 @@
 
 
 <!-- 详情弹出窗口 -->
-<div id="userDetailDialog" class="easyui-dialog" closed="true" buttons="#userDetailDialog-buttons"></div>
-<div id="userDetailDialog-buttons">
-	<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userDetailDialog').dialog('close')">关闭</a>
-</div>
+<div id="userDetailDialog" class="easyui-dialog" closed="true"></div>
 
-<!-- 表单弹出窗口 -->
-<div id="userFormDialog" class="easyui-dialog" closed="true" buttons="#userFormDialog-buttons"></div>
-<div id="userFormDialog-buttons">
-	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
-	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userFormDialog').dialog('close')">取消</a>
-</div>
 </div>
 
 </body>
@@ -71,6 +67,16 @@ $(window).resize(function(){
 	$('#inboxList').datagrid('resize');
 });
 
+//标题
+function forTitle(val,row){
+	var operHtml = '';
+	if(row.isRead){
+		operHtml += '<a href="javascript:;" onclick="openDetailDialog('+row.id+')">'+val+'</a>';
+	}else{
+		operHtml += '<a class="unread" href="javascript:;" onclick="openDetailDialog('+row.id+')">'+val+'</a>';
+	}
+	return operHtml;
+}
 //操作
 function addOper(val,row){
 	var operHtml = '';
@@ -86,9 +92,9 @@ function toSendView(){
 
 //打开详情窗口
 function openDetailDialog(id){
-	var url = '${path}/UserController/toUserDetail.do?id='+id;
+	var url = '${path}/InsideLetterController/toDetailView.do?id='+id;
 	$("#userDetailDialog").dialog({
-		title: '用户详情',
+		title: '站内信',
 		href: url,
 		width: 400,
 		height: 200,

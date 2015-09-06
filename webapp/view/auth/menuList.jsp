@@ -5,26 +5,21 @@
 <%@ include file="/view/common/head.jsp" %>
 </head>
 <body style="min-height: 500px;">
+<div class="mbody">
 
-<div style="margin: 5px;">
-
-<div class="" style="float: left;width: 200px; border: 1px solid #95b8e7;">
-<ul id="menuTree" data-options="method:'get',animate:true">
-</ul>
+<div style="float: left;width: 200px; border: 1px solid #95b8e7;">
+	<ul id="menuTree" data-options="method:'get',animate:true"></ul>
 </div>
 
 <div style="float: left; min-width: 500px;margin-left:5px;">
 <div class="box-positon">
-	<form class="ropt">
-		<input type="button" id="addMenuBut" class="submit" value="新增" /> &nbsp; 
-		<input type="button" id="updateMenuBut" class="reset" value="修改" /> &nbsp; 
-		<input type="button" id="deleteMenuBut" class="del-button" value="删除" /> &nbsp; 
-	</form>
+	<input type="button" id="addMenuBut" class="submit" value="新增" /> &nbsp; 
+	<input type="button" id="updateMenuBut" class="reset" value="修改" /> &nbsp; 
+	<input type="button" id="deleteMenuBut" class="del-button" value="删除" /> &nbsp; 
 	<div class="clear"></div>
 </div>
 
-<div id="menuInfo" style="">
-</div>
+<div id="menuInfo"></div>
 </div>
 
 </div>
@@ -81,8 +76,6 @@ $(function(){
 			msg = '确认删除所有资源节点吗？';
 		}
 		
-		
-		
 		if(confirm(msg)){
 			$.getJSON('${path}/MenuController/removeAll.do', {id: (id=='-1'?'':id)}, function(json){
 				if(json.success){
@@ -107,27 +100,5 @@ $(function(){
 		}
 	});
 });
-
-
-//自适应窗口宽度
-$(window).resize(function(){
-	$('#dataList').datagrid('resize');
-});
-
-//操作
-function addOper(val,row){
-	var operHtml = '';
-	operHtml += '<a class="oper" href="#" onclick="openDetailDialog('+row.id+')">查看</a>&nbsp;';
-	operHtml += '<a class="oper" href="#" onclick="openFormDialog('+row.id+')">修改</a>&nbsp;';
-	operHtml += '<a class="oper" href="javascript:;" onclick="deleteUser('+row.id+')">删除</a>&nbsp;';
-	return operHtml;
-}
-
-//搜 索
-function searchData(){
-	$('#dataList').datagrid('load', {
-		userName: $('#userName').val()
-	});
-}
 
 </script>

@@ -24,6 +24,10 @@ public class InsideLetterService {
 	@javax.annotation.Resource
 	private InsideLetterMapper insideLetterMapper;
 	
+	public InsideLetter getInsideLetter(Integer id) {
+		return insideLetterMapper.getInsideLetter(id);
+	}
+	
 	public EasyuiPage<InsideLetter> getPage(EasyuiPage<InsideLetter> page, String boxType) throws Exception {
 		
 		int userId = AuthenticationHelper.getCurrentUser().getId();
@@ -52,9 +56,6 @@ public class InsideLetterService {
 	}
 
 	
-	public User getUser(int id) throws Exception {
-		return insideLetterMapper.getUser(id);
-	}
 	
 	public List<User> getUserList() throws Exception {
 		return insideLetterMapper.getUserList();
@@ -117,6 +118,9 @@ public class InsideLetterService {
 		user.getRoleList().addAll(roleMap.values());
 		return user;
 	}
+
+
+	
 
 	
 

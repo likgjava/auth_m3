@@ -16,11 +16,11 @@ import com.likg.msg.domain.InsideLetterUser;
 @Repository
 public interface InsideLetterMapper {
 	
-	@Select("SELECT * FROM auth_user WHERE id=#{id}")
-	User get(int id);
+	@Select("SELECT * FROM inside_letter WHERE id=#{id}")
+	InsideLetter get(int id);
 
 	
-	public User getUser(int id);
+	public InsideLetter getInsideLetter(int id);
 
 	public List<User> getUserList();
 	

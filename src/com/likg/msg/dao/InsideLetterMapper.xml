@@ -11,8 +11,11 @@
 		<result property="createTime" column="create_time" />
 	</resultMap>
 
-	<select id="getUser" parameterType="int" resultMap="userMap">
-		select id,user_name from auth_user where id = #{id}
+	<select id="getInsideLetter" parameterType="int" resultType="com.likg.msg.domain.InsideLetter">
+		SELECT t.*,u.user_name sendUserName
+		FROM inside_letter t 
+		join auth_user u on t.send_user_id=u.id 
+		WHERE t.id=#{id}
 	</select>
 	
 	<select id="selectList" resultMap="userMap">

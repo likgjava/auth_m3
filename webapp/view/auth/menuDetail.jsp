@@ -8,6 +8,10 @@
 		<td class="fcontent"><span>${menu.parent.menuName }</span></td>
 	</tr>
 	<tr>
+		<td class="flabel">菜单ID:</td>
+		<td class="fcontent"><span>${menu.id }</span></td>
+	</tr>
+	<tr>
 		<td class="flabel">菜单名称:</td>
 		<td class="fcontent"><span>${menu.menuName }</span></td>
 	</tr>

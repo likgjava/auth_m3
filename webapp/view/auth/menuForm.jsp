@@ -12,6 +12,10 @@
 			<td class="fcontent"><span>${menu.parent.menuName }</span></td>
 		</tr>
 		<tr>
+			<td class="flabel">菜单ID:</td>
+			<td class="fcontent"><span>${menu.id }</span></td>
+		</tr>
+		<tr>
 			<td class="flabel"><span class="pn-frequired">*</span>菜单名称:</td>
 			<td class="fcontent">
 				<input type="text" name="menuName" maxlength="100" class="required" value="${menu.menuName }">
@@ -25,7 +29,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="flabel">资源描述:</td>
+			<td class="flabel">菜单描述:</td>
 			<td class="fcontent"><textarea maxlength="255" name="menuDesc" rows="3" cols="30">${menu.menuDesc }</textarea></td>
 		</tr>
 		<tr>

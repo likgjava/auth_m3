@@ -74,14 +74,14 @@ public class InsideLetterController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		try {
 			//获取用户信息
-			//InsideLetter user = userService.getInsideLetter(id);
-			//model.put("user", user);
+			InsideLetter insideLetter = insideLetterService.getInsideLetter(id);
+			model.put("insideLetter", insideLetter);
 			
 			//获取用户已分配的角色
 		} catch (Exception e) {
 			log.error("出现异常：", e);
 		}
-		return new ModelAndView("view/auth/InsideLetterDetail", model);
+		return new ModelAndView("view/msg/insideLetterDetail", model);
 	}
 	
 	/**
@@ -119,7 +119,6 @@ public class InsideLetterController {
 			insideLetter.getRecipientList().add(rec);
 			
 			User user2 = AuthenticationHelper.getCurrentUser();
-			insideLetter.setCreateUsername(user2.getUsername());
 			insideLetter.setSendUserId(user2.getId());
 			
 			insideLetterService.saveUser(insideLetter);
