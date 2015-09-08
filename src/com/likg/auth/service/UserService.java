@@ -41,7 +41,7 @@ public class UserService {
 	}
 
 	
-	public User getUser(int id) throws Exception {
+	public User get(int id) throws Exception {
 		return userMapper.get(id);
 	}
 	

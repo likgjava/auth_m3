@@ -9,7 +9,7 @@ public class Menu {
 	/**记录号*/
 	private String id;
 	
-	/**记录号*/
+	/**父记录号*/
 	private String parentId;
 	
 	/**父菜单*/
@@ -42,6 +42,7 @@ public class Menu {
 	/**创建时间*/
 	private Date createTime;
 	
+	/**子节点*/
 	private Set<Menu> children = new HashSet<Menu>();
 
 	public String getId() {

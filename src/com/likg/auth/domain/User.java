@@ -22,53 +22,34 @@ public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 记录号
-	 */
+	/**记录号*/
 	private int id;
 	
-	/**
-	 * 用户名
-	 */
+	/**用户名*/
 	private String userName;
 	
-	/**
-	 * 密码
-	 */
+	/**密码*/
 	@JsonIgnore
 	private String password;
 	
-	/**
-	 * 真实姓名
-	 */
+	/**真实姓名*/
 	private String realName;
 	
-	/**
-	 * 使用状态[1:有效；2:禁用]
-	 */
+	/**使用状态[1:有效；2:禁用]*/
 	private int status;
 	
-	/**
-	 * 创建时间
-	 */
+	/**创建时间*/
 	@JsonSerialize(using=MyDateSerializer.class)
 	private Timestamp createTime;
 	
-	/**
-	 * 角色列表
-	 */
+	/**角色列表*/
 	private List<Role> roleList = new ArrayList<Role>();
 	
 	/**重写Spring security中UserDetails的方法*/
-	//@Transient
 	private Set<GrantedAuthority> authorities;
-	//@Transient
 	private boolean accountNonExpired;
-	//@Transient
 	private boolean accountNonLocked;
-	//@Transient
 	private boolean credentialsNonExpired;
-	//@Transient
 	private boolean enabled;
 
 	public int getId() {
@@ -127,8 +108,6 @@ public class User implements UserDetails {
 		this.roleList = roleList;
 	}
 	
-	
-
 	public void setAuthorities(Set<GrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
@@ -173,7 +152,5 @@ public class User implements UserDetails {
 	public String getUsername() {
 		return this.userName;
 	}
-
-	
 
 }

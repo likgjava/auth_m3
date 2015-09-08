@@ -21,8 +21,6 @@ public interface UserMapper {
 	User getUser(String username);
 
 	
-	//public User getUser(int id);
-
 	public List<User> getUserList();
 	
 	public void saveUser(User user);

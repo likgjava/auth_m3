@@ -10,15 +10,9 @@
 		<result property="status" column="status" />
 		<result property="createTime" column="create_time" />
 	</resultMap>
-
-	
-	<select id="selectList" resultMap="userMap">
-		select id,user_name userName from auth_user order by id desc
-	</select>
-	
 	
 	<insert id="saveUser" parameterType="com.likg.auth.domain.User" useGeneratedKeys="true" keyProperty="id">
-		insert into auth_user(user_name,real_name,create_time) values(#{userName},#{realName},#{createTime})
+		insert into auth_user(user_name,real_name,create_time,status) values(#{userName},#{realName},#{createTime},#{status})
 	</insert>
 	
 	<insert id="saveUserRole" parameterType="com.likg.auth.domain.User">

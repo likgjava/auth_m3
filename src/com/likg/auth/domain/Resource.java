@@ -4,12 +4,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.likg.framework.MyDateSerializer;
+
 public class Resource {
 
 	/**记录号*/
 	private String id;
 	
-	/**记录号*/
+	/**父记录号*/
 	private String parentId;
 	
 	/**父资源*/
@@ -34,11 +37,10 @@ public class Resource {
 	private User createUser;
 	
 	/**创建时间*/
+	@JsonSerialize(using=MyDateSerializer.class)
 	private Date createTime;
 	
-	/**角色资源中间表*/
-	//private Set<Role> roles = new HashSet<Role>();
-
+	/**子节点*/
 	private Set<Resource> children = new HashSet<Resource>();
 
 	public String getId() {

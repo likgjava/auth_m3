@@ -16,7 +16,6 @@ import com.likg.auth.domain.Role;
 import com.likg.auth.domain.User;
 import com.likg.auth.service.RoleService;
 import com.likg.auth.service.UserService;
-import com.likg.common.Constants;
 import com.likg.common.domain.EasyuiPage;
 import com.likg.common.domain.JsonResult;
 import com.likg.security.AuthenticationHelper;
@@ -29,7 +28,6 @@ public class UserController {
 	
 	@Resource
 	private UserService userService;
-	
 	@Resource
 	private RoleService roleService;
 
@@ -44,7 +42,7 @@ public class UserController {
 		
 		User user = AuthenticationHelper.getCurrentUser();
 		
-	System.out.println(user.getUsername());
+		System.out.println(user.getUsername());
 	
 		return "view/auth/userList";
 	}
@@ -80,7 +78,7 @@ public class UserController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		try {
 			//获取用户信息
-			User user = userService.getUser(id);
+			User user = userService.get(id);
 			model.put("user", user);
 			
 			//获取用户已分配的角色
@@ -110,7 +108,7 @@ public class UserController {
 			User user = new User();
 			if(id != null) {
 				//获取用户信息
-				user = userService.getUser(id);
+				user = userService.get(id);
 				
 				//获取用户已分配的角色
 				List<Role> allottedRoleList = roleService.getRoleListByUser(user.getId());

@@ -5,31 +5,30 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-//AUTH_ROLE
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.likg.framework.MyDateSerializer;
+
 public class Role implements Serializable {
 
-	private static final long serialVersionUID = -8261510674390717923L;
+	private static final long serialVersionUID = 1L;
 
 	/**记录号*/
 	private int id;
 	
 	/**角色名称*/
-	//@Column(name="ROLE_NAME", length=20)
 	private String roleName;
 	
 	/**角色中文名称*/
-	//@Column(name="ROLE_CH_NAME", length=40)
 	private String roleChName;
 	
-	/*角色描述*/
-	//@Column(name="ROLE_DESC", length=100)
+	/**角色描述*/
 	private String roleDesc;
 	
-	/*创建时间*/
-	//@Temporal(TemporalType.TIMESTAMP)
-	//@Column(name="CREATE_TIME")
+	/**创建时间*/
+	@JsonSerialize(using=MyDateSerializer.class)
 	private Timestamp createTime;
 	
+	/**资源列表*/
 	private Set<Resource> resourceSet = new HashSet<Resource>();
 
 	public int getId() {
